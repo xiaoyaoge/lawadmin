@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>企业管理</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bk_pro.css" rel="stylesheet">
+    <link href="css/bkDialog.css" rel="stylesheet">
+    <link href="css/iconfont.css" rel="stylesheet">
+    <link href="css/common.css" rel="stylesheet">
+</head>
+<body class="ffs">
+
+<nav class="bk-horz-nav bk-horz-nav-min">
+    <div class="bk-nav-logo fl">
+        <!-- <img src="https://magicbox.bkclouds.cc/static_api/v3/components_pro/horizontal_nav1/images/logo.png"> -->
+        法法社CRM客户管理系统
+    </div>
+    <ul class="ffs-breadcrumb">
+        <li class="fir"><a href="#none">首页</a></li>
+        <li class="sec"><a href="#none">二级页面</a></li>
+        <li class="last active"><a href="#none">三级页面</a></li>
+    </ul>
+    <div class="bk-nav-user fr">
+        <span class="mr5">admin</span>
+        <img src="https://magicbox.bkclouds.cc/static_api/v3/components_pro/horizontal_nav1/images/avatar.png">
+    </div>
+</nav>
+<div class="bk-layout bk-layout-has-sidebar" style="height:calc(100% - 60px)">
+    <div class="bk-sidebar slide-open">
+        <div class="slide-switch">
+            <i class="icon bk-icon icon-dedent f14"></i>
+        </div>
+        <div class="nav-list">
+            <ul>
+                <li>
+                    <a href="javascript:;">
+                        <span class="icon-box"><i class="bk-icon icon-order"></i></span>
+                        <span class="nav-name">订单管理</span>
+                    </a>
+                    <div class="flex-subnavs">
+                        <a href="订单管理-短信订单.html"><i></i>短信订单</a>
+                        <a href="订单管理-电子信函.html"><i></i>电子信函</a>
+                        <!-- <a href="订单管理-纸质信函.html"><i></i>纸质信函</a>
+                        <a href="订单管理-专人律师.html"><i></i>专人律师 </a> -->
+                    </div>
+                </li>
+                <li class="pureLink">
+                    <a href="企业管理-企业池.html">
+                        <span class="icon-box"><i class="bk-icon icon-apps"></i></span>
+                        <span class="nav-name">企业管理</span>
+                    </a>
+                </li>
+                <li class="pureLink open">
+                    <a href="办公管理.html">
+                        <span class="icon-box"><i class="bk-icon icon-empty"></i></span>
+                        <span class="nav-name">办公管理</span>
+                    </a>
+                </li>
+                <li class="pureLink">
+                    <a href="仁良律所.html">
+                        <span class="icon-box"><i class="bk-icon icon-id"></i></span>
+                        <span class="nav-name">仁良律所</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="copyright">
+            <p>Copyright &copy; 2012-2017 法法社.</p>
+            <span>All Rights Reserved.</span>
+        </div>
+    </div>
+    <div class="page-content">
+        <div class="bk-panel bk-demo">
+            <div class="bk-panel-header" role="tab">
+                <div class="bk-panel-info fl">
+                    <div class="panel-title">管理办公人员</div>
+                </div>
+                <div class="bk-panel-action fr">
+                    <button data-toggle="modal" data-target="#myModal" id="addUser" class="bk-button bk-primary bk-button-small" title="新增">新增</button>
+                </div>
+            </div>
+            <div class="bk-panel-body">
+                <table class="bk-table">
+                    <thead>
+                        <tr>
+                            <th style="width:20%;">改动日期</th>
+                            <th>姓名</th>
+                            <th>手机</th>
+                            <th>密码</th>
+                            <th style="width:270px;">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>2015-09-20</td>
+                            <td>王尼玛</td>
+                            <td>18686868866</td>
+                            <td>235123123</td>
+                            <td>
+                                <a href="#none" class="bk-text-button">删除</a>
+                                <a href="#none" class="bk-text-button">修改</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="bk-panel-footer p10">
+                <div class="bk-page bk-compact-page fr">
+                    <ul>
+                        <li class="page-item">
+                            <a href="javascript:void(0);" class="page-button">
+                                <i class="bk-icon icon-angle-left"></i>
+                            </a>
+                        </li>
+                        <li class="page-item">
+                            <a href="javascript:void(0);" class="page-button">1</a>
+                        </li>
+                        <li class="page-item cur-page">
+                            <a href="javascript:void(0);" class="page-button">2</a>
+                        </li>
+                        <li class="page-item">
+                            <a href="javascript:void(0);" class="page-button">3</a>
+                        </li>
+                        <li class="page-item">
+                            <a href="javascript:void(0);" class="page-button">4</a>
+                        </li>
+                        <li class="page-item">
+                            <a href="javascript:void(0);" class="page-button">5</a>
+                        </li>
+                        <li class="page-item">
+                            <a href="javascript:void(0);" class="page-button">6</a>
+                        </li>
+                        <li class="page-item">
+                            <a href="javascript:void(0);" class="page-button">
+                                <i class="bk-icon icon-angle-right"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="myModal" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button> -->
+        <div class="bk-dialog-tool">
+            <i class="bk-dialog-close" id="bkDialogClose" data-dismiss="modal" aria-label="Close"></i>
+        </div>
+        <h4 class="modal-title">新增管理人员</h4>
+      </div>
+      <div class="modal-body ffs-modal">
+        <form class="bk-form">
+            <div class="bk-form-item pr45">
+                <label class="bk-label" style="width:150px;">姓名</label>
+                <div class="bk-form-content" style="margin-left:150px;">
+                    <input type="text" class="bk-form-input" name="validation_name" placeholder="请输入用户姓名">
+                </div>
+            </div>
+            <div class="bk-form-item pr45">
+                <label class="bk-label" style="width:150px;">手机号码</label>
+                <div class="bk-form-content" style="margin-left:150px;">
+                    <input type="text" class="bk-form-input" name="validation_name" placeholder="请输入用户手机号码">
+                </div>
+            </div>
+            <div class="bk-form-item pr45">
+                <label class="bk-label" style="width:150px;">密码</label>
+                <div class="bk-form-content" style="margin-left:150px;">
+                    <input type="text" class="bk-form-input" name="validation_name" placeholder="请输入用户密码">
+                </div>
+            </div>
+        </form>
+      </div>
+        <div class="modal-footer ta-c">
+            <a class="bk-button bk-default"  data-dismiss="modal" title="取消">取消</a>
+            <a class="bk-button bk-primary" title="添加">添加</a>
+        </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<script src="js/jquery-1.10.2.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/common.js"></script>
+<script type="text/javascript">
+$('#time .check-list-button').click(function() {
+    $('#time .check-list-button').removeClass('on');
+    $(this).toggleClass('on');
+});
+$('#status .check-list-button').click(function() {
+    $('#status .check-list-button').removeClass('on');
+    $(this).toggleClass('on');
+});
+$('#source .check-list-button').click(function() {
+    $('#source .check-list-button').removeClass('on');
+    $(this).toggleClass('on');
+});
+$('#toggle_cont').click(function() {
+    $('.ffs-modal').addClass('show-detail');
+});
+$('#back_cont').click(function() {
+    $('.ffs-modal').removeClass('show-detail');
+});
+</script>
+</body>
+
+</html>

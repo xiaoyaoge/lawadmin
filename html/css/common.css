@@ -1,0 +1,102 @@
+html, body {background: #fafafa; overflow: hidden; min-width: 1300px;height: 100%;}
+a:focus{text-decoration: none;}
+.bk-layout{min-height: 500px;}
+.page-content{padding: 25px;flex: 1;height: 100%;overflow: auto;}
+.divInline{ display: inline;}
+@media all and (max-height: 550px){
+  .copyright{display: none;}
+}
+.red{color:#FF4949; margin-right: 2px; }
+.ffs .modal-content{border: none;border-radius: 2px;}
+.ffs .txt-info{font-style: none; font-size: 12px; color: #888;  }
+
+.none{display: none !important;}
+.show{display: block !important;}
+.ta-c{text-align: center !important;}
+.ta-l{text-align: left !important;}
+.ta-r{text-align: right !important;}
+span.bk-info{ font-size: 12px; color:#888;}
+.king-page-topbar{background: transparent;border: none;}
+
+.bk-form-radio input[type=radio]{background-image: url(images/bk_check.png);}
+
+.bk-horz-nav{background:#616ed6;padding: 0px;}
+.bk-horz-nav a{color: #fff;}
+.bk-horz-nav .bk-nav-logo{width: 240px;padding-left:25px;background:#434fad;}
+.bk-horz-nav .bk-nav-links > li:hover {background-color: #5d69cc;}
+.bk-horz-nav .bk-nav-links > li > a {color: #fff;}
+.bk-horz-nav .bk-nav-links>li.active, 
+.bk-horz-nav11 .bk-nav-links>li.active{background-color: #5d69cc;}
+
+.bk-horz-nav .bk-nav-links > li.bk-has-submenu > a:after {border-top: 7px solid #fff;}
+
+.bk-horz-nav .bk-nav-user {color: #fff;}
+.nav-list .bk-icon{display: block;margin-top: 18px;}
+
+.bk-layout{min-width: 1200px;}
+
+.bk-tab .bk-tab-head .bk-tab-nav>li.active{background: #5d69cc;}
+
+.check-list-button{border-color:transparent;}
+.check-list-button.on{background:#616ed6;color: #fff;}
+
+.ffs .modal-dialog .bk-dialog-close{margin: 14px 10px 0 0;}
+.ffs .modal-dialog .modal-header{border-bottom: none;}
+
+/* 面包屑 */
+.ffs-breadcrumb{display: inline-block;float: left;margin: 0px;padding: 0px;}
+.ffs-breadcrumb li{position: relative;display: inline-block;float: left;padding-left: 25px;padding-right: 25px;color: #bfc5ee;}
+.ffs-breadcrumb a{display: block;width: 100%;height: 100%;color: #bfc5ee;text-decoration: none;}
+.ffs-breadcrumb .fir{background:#434fad;z-index: 100;}
+.ffs-breadcrumb .sec{padding-left: 39px;background:#4e5ab7;z-index: 99;}
+
+.ffs-breadcrumb .fir:before,
+.ffs-breadcrumb .sec:before{content: "";position: absolute;width: 14px;height: 60px;right: -14px;top: 0px;}
+
+.ffs-breadcrumb .fir:before{background: url(images/breadcrumb_fir.png) no-repeat;}
+.ffs-breadcrumb .sec:before{background: url(images/breadcrumb_sec.png) no-repeat;}
+
+.ffs-breadcrumb .last{padding-left: 39px;}
+.ffs-breadcrumb li.active a{color: #fafafa !important;}
+
+/* 订单管理-订单详情弹层内容 */
+.ffs h5{height: 26px;line-height: 26px;border-left:4px solid #616ed6;padding-left: 15px;}
+.ffs .cont{width: 100%;margin-bottom: 15px;background: #fff;border:1px solid #ddd;padding: 10px 20px 20px 20px;}
+
+.ffs .cont .bk-label{padding-left: 20px;color: #aaa;padding: 0 20px 0 0;line-height: 36px;}
+.ffs .cont .bk-table{background: #fff;}
+.ffs .cont .bk-label .red{ color: #ff4949; margin-right:4px; }
+.ffs .cont .bk-form-content{margin-left: 160px;line-height: 34px;}
+.ffs .cont .bk-form-textarea{min-height: 50px;}
+.ffs .cont .bk-form-input[readonly],
+.ffs .cont .bk-form-textarea[readonly]{border: 1px solid transparent;background: transparent;}
+.ffs .cont .bk-text-info{line-height: 38px;margin-left: 10px;}
+.ffs .cont .bk-info{line-height: 36px;}
+.ffs .cont .bk-text{line-height: 36px; color:#999999; }
+.bk-form-content .bk-text{color:#999999; font-size: 13px;}
+
+.ffs .cont-btns{width: 100%;overflow: hidden;}
+.ffs .b-manage-title{overflow: hidden;}
+.ffs .b-manage-btns{margin: 7px 0;}
+
+.ffs-modal .info,
+.ffs-modal.show-detail .detail{display: block;}
+.ffs-modal .detail,
+.ffs-modal.show-detail .info{display: none;}
+
+.ffs .ffs-modal .cont{background: #fafafa;border:1px solid transparent;}
+
+.ffs .img-wrap .bk-button{width: 100%;}
+.ffs .img-title{text-align: center;margin-bottom: 15px;font-size: 16px;}
+.ffs .img-box{width: 100%;height: 260px;margin-bottom:15px;overflow: hidden;vertical-align: middle;border: 1px solid #ddd;}
+.ffs .img-box img{width: 100%;}
+
+.ffs .table-select{width: 80px;}
+
+ 
+.page-container { font-size: 20px; text-align: center; color: rgb(192, 204, 218);}
+ 
+.ffs.b-info .bk-form-input,
+.ffs.b-add-new .bk-form-input{width: 400px;}
+.ffs.b-add-new .cont-from-btns{padding: 60px 0;}
+ 
