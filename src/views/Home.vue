@@ -60,7 +60,11 @@
                     </div>
                 </div>
                 <div class="copyright">
+<<<<<<< HEAD
                     <p>Copyright &copy; 2012-2017 法法社.</p>
+=======
+                    <p>Copyright &copy; 2012-2017 仁良律所.</p>
+>>>>>>> d763f09890ecc367b299ea7db98e0e2f4e63f8e8
                     <span>All Rights Reserved.</span>
                 </div>
             </div>
@@ -81,7 +85,11 @@ import '../../html/css/common.css'
 export default {
     data() {
         return {
+<<<<<<< HEAD
             sysName: '法法社CRM客户管理系统',
+=======
+            sysName: '律所官网管理后台',
+>>>>>>> d763f09890ecc367b299ea7db98e0e2f4e63f8e8
             parentUrlName: '',
             parentUrls: '',
             collapsed: true,
@@ -157,7 +165,11 @@ export default {
     },
     mounted() {
         var user = sessionStorage.getItem('user');
+<<<<<<< HEAD
         if (user) {
+=======
+        if (user) { 
+>>>>>>> d763f09890ecc367b299ea7db98e0e2f4e63f8e8
             user = JSON.parse(user);
             this.sysUserName = user.name || '';
             this.sysUserAvatar = user.role || 0; 

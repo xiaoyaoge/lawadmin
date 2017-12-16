@@ -594,7 +594,7 @@ export default {
     mounted() {
         this.$parent.parentUrlName = "企业管理";
         this.$parent.parentUrls = '/enterprise';
-        this.getDataList();
+        //this.getDataList();
     }
 }
 </script>

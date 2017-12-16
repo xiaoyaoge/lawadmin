@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>订单管理</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- <link href="css/bk.css" rel="stylesheet"> -->
+    <link href="css/bk_pro.css" rel="stylesheet">
+    <link href="css/iconfont.css" rel="stylesheet">
+    <link href="css/common.css" rel="stylesheet">
+</head>
+<body class="ffs">
+
+<nav class="bk-horz-nav bk-horz-nav-min">
+    <div class="bk-nav-logo fl">
+        <!-- <img src="https://magicbox.bkclouds.cc/static_api/v3/components_pro/horizontal_nav1/images/logo.png"> -->
+        法法社CRM客户管理系统
+    </div>
+    <div class="bk-nav-user fr">
+        <span class="mr5">admin</span>
+        <img src="https://magicbox.bkclouds.cc/static_api/v3/components_pro/horizontal_nav1/images/avatar.png">
+    </div>
+</nav>
+<div class="bk-layout bk-layout-has-sidebar" style="height:calc(100% - 60px)">
+    <div class="bk-sidebar slide-open">
+        <div class="slide-switch">
+            <i class="icon bk-icon icon-dedent f14"></i>
+        </div>
+        <div class="nav-list">
+            <ul>
+                <li class="open">
+                    <a href="订单管理-短信订单.html">
+                        <span class="icon-box"><i class="bk-icon icon-order"></i></span>
+                        <span class="nav-name">订单管理</span>
+                    </a>
+                    <div class="flex-subnavs" style="display: block">
+                        <a href="订单管理-短信订单.html"><i></i>短信订单</a>
+                        <a href="订单管理-电子信函.html"><i></i>电子信函</a>
+                        <a class="on" href="订单管理-纸质信函.html"><i></i>纸质信函</a>
+                        <a href="订单管理-专人律师.html"><i></i>专人律师 </a>
+                    </div>
+                </li>
+                <li class="pureLink">
+                    <a href="律所管理-律所池.html">
+                        <span class="icon-box"><i class="bk-icon icon-id"></i></span>
+                        <span class="nav-name">律所管理</span>
+                    </a>
+                </li>
+                <li class="pureLink">
+                    <a href="企业管理-企业池.html">
+                        <span class="icon-box"><i class="bk-icon icon-apps"></i></span>
+                        <span class="nav-name">企业管理</span>
+                    </a>
+                </li>
+                <li class="pureLink">
+                    <a href="办公管理.html">
+                        <span class="icon-box"><i class="bk-icon icon-empty"></i></span>
+                        <span class="nav-name">办公管理</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="copyright">
+            <p>Copyright &copy; 2012-2017 法法社.</p>
+            <span>All Rights Reserved.</span>
+        </div>
+    </div>
+    <div class="page-content">
+        <div class="bk-panel mb20">
+            <div class="bk-panel-body p25">
+                <form class="bk-form">
+                    <div class="row">
+                        <!-- 交互说明: 选中条件后给A标签添加类 on -->
+                        <div id="time" class="col-md-12 col-lg-12 col-xs-12 mb15">
+                            <label class="bk-label pr15" style="width:100px;">提交时间：</label>
+                            <a class="bk-button bk-default bk-button-small check-list-button on" title=""><span>全部</span></a>
+                            <a class="bk-button bk-default bk-button-small check-list-button" title=""><span>最近一小时</span></a>
+                            <a class="bk-button bk-default bk-button-small check-list-button" title=""><span>最近一天</span></a>
+                        </div>
+                        <div id="status" class="col-md-12 col-lg-12 col-xs-12 mb15">
+                            <label class="bk-label pr15" style="width:100px;">当前状态：</label>
+                            <a class="bk-button bk-default bk-button-small check-list-button on" title=""><span>全部</span></a>
+                            <a class="bk-button bk-default bk-button-small check-list-button" title=""><span>申请中</span></a>
+                            <a class="bk-button bk-default bk-button-small check-list-button" title=""><span>快递发送中</span></a>
+                            <a class="bk-button bk-default bk-button-small check-list-button" title=""><span>快递到达</span></a>
+                        </div>
+                        <div id="source" class="col-md-12 col-lg-12 col-xs-12 mb15">
+                            <label class="bk-label pr15" style="width:100px;">订单来源：</label>
+                            <a class="bk-button bk-default bk-button-small check-list-button on" title=""><span>全部</span></a>
+                            <a class="bk-button bk-default bk-button-small check-list-button" title=""><span>企业</span></a>
+                            <a class="bk-button bk-default bk-button-small check-list-button" title=""><span>用户</span></a>
+                        </div>
+                    </div>
+
+                    <div class="row more-query-cont mb15">
+                        <div class="col-md-3 col-lg-3 col-xs-3">
+                            <div class="bk-form-item mb20">
+                                <label class="bk-label pr15" style="width:100px;">单号：</label>
+                                <div class="bk-form-content" style="margin-left:100px;">
+                                    <input type="text" class="bk-form-input" style="width:100%;">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3 col-lg-3 col-xs-3">
+                            <div class="bk-form-item mb20">
+                                <label class="bk-label pr15" style="width:100px;">手机号：</label>
+                                <div class="bk-form-content" style="margin-left:100px;">
+                                    <input type="text" class="bk-form-input" style="width:100%;">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3 col-lg-3 col-xs-3">
+                            <div class="bk-form-item mb20">
+                                <label class="bk-label pr15" style="width:100px;">律所：</label>
+                                <div class="bk-form-content" style="margin-left:100px;">
+                                    <input type="text" class="bk-form-input" style="width:100%;">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3 col-lg-3 col-xs-3">
+                            <div class="bk-form-item mb20">
+                                <label class="bk-label pr15" style="width:100px;">企业名：</label>
+                                <div class="bk-form-content" style="margin-left:100px;">
+                                    <input type="text" class="bk-form-input" style="width:100%;">
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-12 col-lg-12 col-xs-12">
+                            <div class="bk-form-content" style="margin-left:100px;">
+                                <button class="bk-button bk-success">查询</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </form>
+            </div>
+        </div>
+        <!-- 主要表格 -->
+        <div class="bk-panel bk-demo">
+            <div class="bk-panel-header" role="tab">
+                <div class="bk-panel-action fl">
+                    <div class="bk-form bk-inline-form bk-form-small">
+                        <div class="bk-form-item is-required">
+                            <div class="bk-form-content">
+                                <input type="text" class="bk-form-input" placeholder="请输入搜索关键字" style="width:290px;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bk-panel-body p0">
+                <table class="bk-table has-thead-bordered">
+                    <thead>
+                        <tr>
+                            <th style="width:25px">
+                                <input type="checkbox" name="checkall" value="">
+                            </th>
+                            <th>订单号</th>
+                            <th>订单来源</th>
+                            <th>联系电话</th>
+                            <th>律所</th>
+                            <th>当前状态</th>
+                            <th>提交时间</th>
+                            <th style="width:325px">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <input type="checkbox" name="checkall" value="">
+                            </td>
+                            <td>XY20170303254541</td>
+                            <td>企业\发大财企业</td>
+                            <td>123-4567-8954</td>
+                            <td>法法社自营律所</td>
+                            <td>申请中</td>
+                            <td>36分钟前</td>
+                            <td>
+                                <a data-toggle="modal" data-target="#myModal" href="javascript:void(0);" class="bk-text-button">查看详情</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="checkbox" name="checkall" value="">
+                            </td>
+                            <td>XY20170303254541</td>
+                            <td>企业\发大财企业</td>
+                            <td>123-4567-8954</td>
+                            <td>法法社自营律所</td>
+                            <td>申请中</td>
+                            <td>36分钟前</td>
+                            <td>
+                                <a data-toggle="modal" data-target="#myModal" href="javascript:void(0);" class="bk-text-button">查看详情</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="checkbox" name="checkall" value="">
+                            </td>
+                            <td>XY20170303254541</td>
+                            <td>企业\发大财企业</td>
+                            <td>123-4567-8954</td>
+                            <td>法法社自营律所</td>
+                            <td>申请中</td>
+                            <td>36分钟前</td>
+                            <td>
+                                <a data-toggle="modal" data-target="#myModal" href="javascript:void(0);" class="bk-text-button">查看详情</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="checkbox" name="checkall" value="">
+                            </td>
+                            <td>XY20170303254541</td>
+                            <td>企业\发大财企业</td>
+                            <td>123-4567-8954</td>
+                            <td>法法社自营律所</td>
+                            <td>申请中</td>
+                            <td>36分钟前</td>
+                            <td>
+                                <a data-toggle="modal" data-target="#myModal" href="javascript:void(0);" class="bk-text-button">查看详情</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="checkbox" name="checkall" value="">
+                            </td>
+                            <td>XY20170303254541</td>
+                            <td>企业\发大财企业</td>
+                            <td>123-4567-8954</td>
+                            <td>法法社自营律所</td>
+                            <td>申请中</td>
+                            <td>36分钟前</td>
+                            <td>
+                                <a data-toggle="modal" data-target="#myModal" href="javascript:void(0);" class="bk-text-button">查看详情</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="checkbox" name="checkall" value="">
+                            </td>
+                            <td>XY20170303254541</td>
+                            <td>企业\发大财企业</td>
+                            <td>123-4567-8954</td>
+                            <td>法法社自营律所</td>
+                            <td>申请中</td>
+                            <td>36分钟前</td>
+                            <td>
+                                <a data-toggle="modal" data-target="#myModal" href="javascript:void(0);" class="bk-text-button">查看详情</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="checkbox" name="checkall" value="">
+                            </td>
+                            <td>XY20170303254541</td>
+                            <td>企业\发大财企业</td>
+                            <td>123-4567-8954</td>
+                            <td>法法社自营律所</td>
+                            <td>申请中</td>
+                            <td>36分钟前</td>
+                            <td>
+                                <a data-toggle="modal" data-target="#myModal" href="javascript:void(0);" class="bk-text-button">查看详情</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="checkbox" name="checkall" value="">
+                            </td>
+                            <td>XY20170303254541</td>
+                            <td>企业\发大财企业</td>
+                            <td>123-4567-8954</td>
+                            <td>法法社自营律所</td>
+                            <td>申请中</td>
+                            <td>36分钟前</td>
+                            <td>
+                                <a data-toggle="modal" data-target="#myModal" href="javascript:void(0);" class="bk-text-button">查看详情</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="checkbox" name="checkall" value="">
+                            </td>
+                            <td>XY20170303254541</td>
+                            <td>企业\发大财企业</td>
+                            <td>123-4567-8954</td>
+                            <td>法法社自营律所</td>
+                            <td>申请中</td>
+                            <td>36分钟前</td>
+                            <td>
+                                <a data-toggle="modal" data-target="#myModal" href="javascript:void(0);" class="bk-text-button">查看详情</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="checkbox" name="checkall" value="">
+                            </td>
+                            <td>XY20170303254541</td>
+                            <td>企业\发大财企业</td>
+                            <td>123-4567-8954</td>
+                            <td>法法社自营律所</td>
+                            <td>申请中</td>
+                            <td>36分钟前</td>
+                            <td>
+                                <a data-toggle="modal" data-target="#myModal" href="javascript:void(0);" class="bk-text-button">查看详情</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="checkbox" name="checkall" value="">
+                            </td>
+                            <td>XY20170303254541</td>
+                            <td>企业\发大财企业</td>
+                            <td>123-4567-8954</td>
+                            <td>法法社自营律所</td>
+                            <td>申请中</td>
+                            <td>36分钟前</td>
+                            <td>
+                                <a data-toggle="modal" data-target="#myModal" href="javascript:void(0);" class="bk-text-button">查看详情</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="checkbox" name="checkall" value="">
+                            </td>
+                            <td>XY20170303254541</td>
+                            <td>企业\发大财企业</td>
+                            <td>123-4567-8954</td>
+                            <td>法法社自营律所</td>
+                            <td>申请中</td>
+                            <td>36分钟前</td>
+                            <td>
+                                <a data-toggle="modal" data-target="#myModal" href="javascript:void(0);" class="bk-text-button">查看详情</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="checkbox" name="checkall" value="">
+                            </td>
+                            <td>XY20170303254541</td>
+                            <td>企业\发大财企业</td>
+                            <td>123-4567-8954</td>
+                            <td>法法社自营律所</td>
+                            <td>申请中</td>
+                            <td>36分钟前</td>
+                            <td>
+                                <a data-toggle="modal" data-target="#myModal" href="javascript:void(0);" class="bk-text-button">查看详情</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="checkbox" name="checkall" value="">
+                            </td>
+                            <td>XY20170303254541</td>
+                            <td>企业\发大财企业</td>
+                            <td>123-4567-8954</td>
+                            <td>法法社自营律所</td>
+                            <td>申请中</td>
+                            <td>36分钟前</td>
+                            <td>
+                                <a data-toggle="modal" data-target="#myModal" href="javascript:void(0);" class="bk-text-button">查看详情</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="checkbox" name="checkall" value="">
+                            </td>
+                            <td>XY20170303254541</td>
+                            <td>企业\发大财企业</td>
+                            <td>123-4567-8954</td>
+                            <td>法法社自营律所</td>
+                            <td>申请中</td>
+                            <td>36分钟前</td>
+                            <td>
+                                <a data-toggle="modal" data-target="#myModal" href="javascript:void(0);" class="bk-text-button">查看详情</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="bk-panel-footer p10">
+                <button class="bk-button bk-default bk-button-small fl" title="下载搜索结果">
+                    下载搜索结果
+                </button>
+                <div class="bk-page bk-compact-page fr">
+                    <ul>
+                        <li class="page-item">
+                            <a href="javascript:void(0);" class="page-button">
+                                <i class="bk-icon icon-angle-left"></i>
+                            </a>
+                        </li>
+                        <li class="page-item">
+                            <a href="javascript:void(0);" class="page-button">1</a>
+                        </li>
+                        <li class="page-item cur-page">
+                            <a href="javascript:void(0);" class="page-button">2</a>
+                        </li>
+                        <li class="page-item">
+                            <a href="javascript:void(0);" class="page-button">3</a>
+                        </li>
+                        <li class="page-item">
+                            <a href="javascript:void(0);" class="page-button">4</a>
+                        </li>
+                        <li class="page-item">
+                            <a href="javascript:void(0);" class="page-button">5</a>
+                        </li>
+                        <li class="page-item">
+                            <a href="javascript:void(0);" class="page-button">6</a>
+                        </li>
+                        <li class="page-item">
+                            <a href="javascript:void(0);" class="page-button">
+                                <i class="bk-icon icon-angle-right"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="myModal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">订单详情</h4>
+      </div>
+      <div class="modal-body ffs-modal">
+        <div class="info">
+            <div class="cont">
+                <h5>下单信息</h5>
+                <form class="bk-form" id="validate_form" method="POST" action="javascript:;">
+                    <div class="bk-form-item">
+                        <label class="bk-label">订单类型：</label>
+                        <div class="bk-form-content">
+                            <input type="text" class="bk-form-input" name="" placeholder="" value="短信\电子信函\纸质信函\专人律师" readonly>
+                        </div>
+                    </div>
+                    <div class="bk-form-item mt5">
+                        <label class="bk-label">订单来源：</label>
+                        <div class="bk-form-content">
+                            <input type="text" class="bk-form-input" name="" placeholder="" value="企业（发大财企业）\用户" readonly>
+                        </div>
+                    </div>
+                    <div class="bk-form-item mt5">
+                        <label class="bk-label">订单单号：</label>
+                        <div class="bk-form-content">
+                            <input type="text" class="bk-form-input" name="" placeholder="" value="FFS29283838" readonly>
+                        </div>
+                    </div>
+                    <div class="bk-form-item mt5">
+                        <label class="bk-label">下单时间：</label>
+                        <div class="bk-form-content">
+                            <input type="text" class="bk-form-input" name="" placeholder="" value="2017年8月8日 18:18:18" readonly>
+                        </div>
+                    </div>
+                    <div class="bk-form-item mt5">
+                        <label class="bk-label">联系电话：</label>
+                        <div class="bk-form-content">
+                            <input type="text" class="bk-form-input" name="" placeholder="" value="王尼玛/13634340013" readonly>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="cont">
+                <h5>业务信息</h5>
+                <form class="bk-form" id="validate_form" method="POST" action="javascript:;">
+                    <div class="bk-form-item">
+                        <label class="bk-label">订单类型：</label>
+                        <div class="bk-form-content">
+                            <input type="text" class="bk-form-input" name="" placeholder="" value="短信" readonly>
+                        </div>
+                    </div>
+                    <div class="bk-form-item mt5">
+                        <label class="bk-label">律所：</label>
+                        <div class="bk-form-content">
+                            <input type="text" class="bk-form-input" name="" placeholder="" value="法法社自营律所" readonly>
+                        </div>
+                    </div>
+                    <div class="bk-form-item mt5">
+                        <label class="bk-label">模板：</label>
+                        <div class="bk-form-content">
+                            <a class="bk-text-button bk-info ml10" target="_blank" href="images/temp.png" title="查看模板">查看模板</a>
+                        </div>
+                    </div>
+                    <div class="bk-form-item mt5">
+                        <label class="bk-label">发送时间：</label>
+                        <div class="bk-form-content">
+                            <input type="text" class="bk-form-input" name="" placeholder="" value="2017年8月8日 18:18:18" readonly>
+                        </div>
+                    </div>
+                    <div class="bk-form-item mt5">
+                        <label class="bk-label">第三方：</label>
+                        <div class="bk-form-content">
+                            <input type="text" class="bk-form-input" name="" placeholder="" value="法大大" readonly>
+                        </div>
+                    </div>
+                    <div class="bk-form-item mt5">
+                        <label class="bk-label">到达时间：</label>
+                        <div class="bk-form-content">
+                            <input type="text" class="bk-form-input" name="" placeholder="" value="发送失败" readonly>
+                        </div>
+                    </div>
+                    <div class="bk-form-item mt5">
+                        <label class="bk-label">发送明细：</label>
+                        <div class="bk-form-content">
+                            <a id="toggle_cont" class="bk-text-button bk-info ml10" title="查看明细">查看明细</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="detail">
+            <div class="cont-btns">
+                <a id="back_cont" class="bk-button bk-default bk-button-small mb15 fl" title="返回"><span>返回</span></a>
+                <a class="bk-button bk-default bk-button-small mb15 fr" title="批量导入"><span>批量导入</span></a>
+            </div>
+            <div class="cont">
+                <h5>短信发送明细</h5>
+                <table class="bk-table has-table-bordered has-table-hover">
+                    <thead>
+                        <tr>
+                            <th>姓名</th>
+                            <th>地址</th>
+                            <th>电话</th>
+                            <th>快递单号</th>
+                            <th>是否到达</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>李三</td>
+                            <td>深圳市南山区科兴科学院\518000</td>
+                            <td>18592849362</td>
+                            <td>d24511454411\申通</td>
+                            <td>是</td>
+                        </tr>
+                    </tbody>  
+                </table> 
+            </div>
+        </div>
+      </div>
+      <div class="modal-footer ta-c">
+        <a class="bk-button bk-primary" data-dismiss="modal" title="添加">关闭</a>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<script src="js/jquery-1.10.2.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/common.js"></script>
+<script type="text/javascript">
+$('#time .check-list-button').click(function() {
+    $('#time .check-list-button').removeClass('on');
+    $(this).toggleClass('on');
+});
+$('#status .check-list-button').click(function() {
+    $('#status .check-list-button').removeClass('on');
+    $(this).toggleClass('on');
+});
+$('#source .check-list-button').click(function() {
+    $('#source .check-list-button').removeClass('on');
+    $(this).toggleClass('on');
+});
+
+$('#toggle_cont').click(function() {
+    $('.ffs-modal').addClass('show-detail');
+});
+$('#back_cont').click(function() {
+    $('.ffs-modal').removeClass('show-detail');
+});
+</script>
+</body>
+
+</html>

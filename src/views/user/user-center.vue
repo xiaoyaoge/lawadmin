@@ -3,7 +3,7 @@
         <div class="bk-panel bk-demo">
             <div class="bk-panel-header" role="tab">
                 <div class="bk-panel-info fl">
-                    <div class="panel-title">管理办公人员</div>
+                    <div class="panel-title">管理员</div>
                     <div class="panel-subtitle"></div>
                 </div>
                 <div class="bk-panel-action fr">
@@ -336,7 +336,11 @@ export default {
         }
     },
     mounted() {
+<<<<<<< HEAD
         this.getDataList();
+=======
+        //this.getDataList();
+>>>>>>> d763f09890ecc367b299ea7db98e0e2f4e63f8e8
     }
 }
 </script>

@@ -592,7 +592,7 @@ export default {
         }
     },
     mounted() {
-        this.getDataList();
+        //this.getDataList();
     }
 }
 </script>

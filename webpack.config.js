@@ -6,7 +6,11 @@ const WebpackMd5Hash = require('webpack-md5-hash')
 const InlineManifestWebpackPlugin = require('inline-manifest-webpack-plugin')
 const CompressionWebpackPlugin = require('compression-webpack-plugin');
 const url = require('url')
+<<<<<<< HEAD
 const publicPath = '/'
+=======
+const publicPath = ''
+>>>>>>> d763f09890ecc367b299ea7db98e0e2f4e63f8e8
 
 module.exports = (options = {}) => ({
     entry: {
@@ -18,7 +22,11 @@ module.exports = (options = {}) => ({
         filename: options.dev ? '[name].js' : '[name].[chunkhash:8].js',
         chunkFilename: '[id].[chunkhash:8].js',
         publicPath: options.dev ? '/assets/' : publicPath
+<<<<<<< HEAD
     },
+=======
+    }, 
+>>>>>>> d763f09890ecc367b299ea7db98e0e2f4e63f8e8
     module: {
         rules: [{
             test: /\.vue$/,
@@ -29,7 +37,11 @@ module.exports = (options = {}) => ({
             exclude: /node_modules/
         }, {
             test: /\.css$/,
+<<<<<<< HEAD
             loader: ExtractTextPlugin.extract({ fallback: 'style-loader', use:['css-loader','postcss-loader']})
+=======
+            use: ['style-loader', 'css-loader', 'postcss-loader'],
+>>>>>>> d763f09890ecc367b299ea7db98e0e2f4e63f8e8
 
         }, {
             test: /\.(png|jpg|jpeg|gif)(\?.+)?$/,
@@ -90,7 +102,11 @@ module.exports = (options = {}) => ({
     },
     devServer: {
         host: '127.0.0.1',
+<<<<<<< HEAD
         port: 8021,
+=======
+        port: 8023,
+>>>>>>> d763f09890ecc367b299ea7db98e0e2f4e63f8e8
         proxy: {
             '/api/': {
                 target: '127.0.0.1',

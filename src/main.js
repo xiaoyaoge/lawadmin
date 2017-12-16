@@ -21,13 +21,14 @@ const router = new VueRouter({
     routes
 })
 
+sessionStorage.setItem('user', JSON.stringify({ name: '何挺', role: 99 }));
 router.beforeEach((to, from, next) => {
     if (to.path == '/login' || to.path == '/') {
         sessionStorage.removeItem('user');
     }
     let user = JSON.parse(sessionStorage.getItem('user'));
     if (!user && to.path != '/login') {
-        next({ path: '/login' })
+        //next({ path: '/login' })
     } else {
         next()
     }
@@ -38,7 +39,8 @@ router.afterEach(transition => {
 });
 
 
-new Vue({ 
-  router, 
-  render: h => h(App)
+
+new Vue({
+    router,
+    render: h => h(App)
 }).$mount('#app')

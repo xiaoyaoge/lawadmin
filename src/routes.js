@@ -13,7 +13,7 @@ import EnterMsg from './views/enterprise/enterprise-msg.vue'
 import EnterEmail from './views/enterprise/enterprise-email.vue'
 import EnterLetter from './views/enterprise/enterprise-letter.vue'
 import LawFirm from './views/firm/law-firm.vue'
-
+import NewsAdd from './views/news/add.vue'
 
 let routes = [{
         path: '/login',
@@ -29,6 +29,35 @@ let routes = [{
         role: 0,
         hidden: true
     }, {
+        path: '/',
+        component: Home,
+        name: '办公管理',
+        iconCls: 'icon-empty',
+        hidden: false,
+        leaf: true, //只有一个节点
+        paths: '/manager',
+        role: 99,
+        children: [
+            { path: '/manager', component: UserCenter, name: '办公管理' }
+        ]
+    },
+    {
+        path: '/',
+        component: Home,
+        name: '新闻管理',
+        iconCls: 'icon-id',
+        hidden: false,
+        leaf: false, //只有一个节点
+        paths: '/news',
+        role: 99,
+        children: [
+            { path: '/news', component: NewsAdd, name: '新闻管理' },
+            { path: '/news/add', component: NewsAdd, name: '新闻管理' },
+            { path: '/news/edit', component: NewsAdd, name: '新闻管理' }
+
+        ]
+    },
+    {
         path: '/',
         component: Home,
         name: '律所管理',
@@ -57,8 +86,9 @@ let routes = [{
             { path: '/enterprise/enterForm', component: EnterForm, name: '入驻新企业', hidden: true },
             { path: '/enterprise/enterInfo/:id', component: EnterInfo, name: '基本信息', hidden: true },
             { path: '/enterprise/enterMsg/:id', component: EnterMsg, name: '短信订单', hidden: true },
-            { path: '/enterprise/enterEmail/:id', component: EnterEmail, name: '电子信函',hidden: true },
-            { path: '/enterprise/enterLetter/:id', component: EnterLetter, name: '纸质信函', hidden: true  }
+            { path: '/enterprise/enterEmail/:id', component: EnterEmail, name: '电子信函', hidden: true },
+            { path: '/enterprise/enterLetter/:id', component: EnterLetter, name: '纸质信函', hidden: true }
+
         ]
     },
     {

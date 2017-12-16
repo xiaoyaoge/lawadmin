@@ -32,7 +32,7 @@
                                 </select>
                             </td>
                             <td>{{nameStr(items.smsProviderList)}}</td>
-                            <td>{{dateTime(items.smsProviderList)}}</td>
+                            <td>{{dateTime(items.modifyTime)}}</td>
                             <td>
                                 <a @click="preview(items,'msg','info')" class="bk-text-button">查看详情</a>
                                 <a @click="preview(items,'msg','edit')" class="bk-text-button">编辑</a>
@@ -45,7 +45,7 @@
                 <div class="b-manage-title">
                     <h5 class="fl">信函模板</h5>
                     <div class="edit-btns b-manage-btns fr">
-                        <!-- 交互说明 
+                        <!-- 交互说明
                              点击修改后，把保存于取消按钮显示出来，同时把info里所有input 的 readonly 去除
                         -->
                         <a class="bk-button bk-success bk-button-small ml10 fr" @click="create('email')" title="添加"><span>添加</span></a>
@@ -486,9 +486,9 @@ export default {
 
     },
     mounted() {
-        this.getyunyinshan()
-        this.gitData(1);
-        this.gitData(2);
+        // this.getyunyinshan()
+        // this.gitData(1);
+        // this.gitData(2);
     }
 }
 </script>

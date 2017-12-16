@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>企业管理</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bk_pro.css" rel="stylesheet">
+    <link href="css/bkDialog.css" rel="stylesheet">
+    <link href="css/iconfont.css" rel="stylesheet">
+    <link href="css/common.css" rel="stylesheet">
+</head>
+<body class="ffs">
+
+<nav class="bk-horz-nav bk-horz-nav-min">
+    <div class="bk-nav-logo fl">
+        <!-- <img src="https://magicbox.bkclouds.cc/static_api/v3/components_pro/horizontal_nav1/images/logo.png"> -->
+        法法社CRM客户管理系统
+    </div>
+    <ul class="ffs-breadcrumb">
+        <li class="fir"><a href="#none">首页</a></li>
+        <li class="sec"><a href="#none">二级页面</a></li>
+        <li class="last active"><a href="#none">三级页面</a></li>
+    </ul>
+    <div class="bk-nav-user fr">
+        <span class="mr5">admin</span>
+        <img src="https://magicbox.bkclouds.cc/static_api/v3/components_pro/horizontal_nav1/images/avatar.png">
+    </div>
+</nav>
+<div class="bk-layout bk-layout-has-sidebar" style="height:calc(100% - 60px)">
+    <div class="bk-sidebar slide-open">
+        <div class="slide-switch">
+            <i class="icon bk-icon icon-dedent f14"></i>
+        </div>
+        <div class="nav-list">
+            <ul>
+                <li>
+                    <a href="javascript:;">
+                        <span class="icon-box"><i class="bk-icon icon-order"></i></span>
+                        <span class="nav-name">订单管理</span>
+                    </a>
+                    <div class="flex-subnavs">
+                        <a href="订单管理-短信订单.html"><i></i>短信订单</a>
+                        <a href="订单管理-电子信函.html"><i></i>电子信函</a>
+                        <!-- <a href="订单管理-纸质信函.html"><i></i>纸质信函</a>
+                        <a href="订单管理-专人律师.html"><i></i>专人律师 </a> -->
+                    </div>
+                </li>
+                <li class="pureLink open">
+                    <a href="企业管理-企业池.html">
+                        <span class="icon-box"><i class="bk-icon icon-apps"></i></span>
+                        <span class="nav-name">企业管理</span>
+                    </a>
+                </li>
+                <li class="pureLink">
+                    <a href="办公管理.html">
+                        <span class="icon-box"><i class="bk-icon icon-empty"></i></span>
+                        <span class="nav-name">办公管理</span>
+                    </a>
+                </li>
+                <li class="pureLink">
+                    <a href="仁良律所.html">
+                        <span class="icon-box"><i class="bk-icon icon-id"></i></span>
+                        <span class="nav-name">仁良律所</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="copyright">
+            <p>Copyright &copy; 2012-2017 法法社.</p>
+            <span>All Rights Reserved.</span>
+        </div>
+    </div>
+    <div class="page-content">
+        <div class="bk-panel mb20">
+            <div class="bk-panel-body p25">
+                <form class="bk-form">
+                    <div class="row">
+                        <!-- 交互说明: 选中条件后给A标签添加类 on -->
+                        <div id="time" class="col-md-12 col-lg-12 col-xs-12 mb15">
+                            <label class="bk-label pr15" style="width:100px;">入驻时间：</label>
+                            <a class="bk-button bk-default bk-button-small check-list-button on" title=""><span>最近一年</span></a>
+                            <a class="bk-button bk-default bk-button-small check-list-button" title=""><span>最近半年</span></a>
+                            <a class="bk-button bk-default bk-button-small check-list-button" title=""><span>最近一个月</span></a>
+                        </div>
+                    </div>
+                    <div class="row more-query-cont mb15">
+                        <div class="col-md-3 col-lg-3 col-xs-3">
+                            <div class="bk-form-item mb20">
+                                <label class="bk-label pr15" style="width:100px;">企业名称：</label>
+                                <div class="bk-form-content" style="margin-left:100px;">
+                                    <input type="text" class="bk-form-input" style="width:100%;">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-lg-3 col-xs-3">
+                            <div class="bk-form-item mb20">
+                                <label class="bk-label pr15" style="width:100px;">联系电话：</label>
+                                <div class="bk-form-content" style="margin-left:100px;">
+                                    <input type="text" class="bk-form-input" style="width:100%;">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-lg-12 col-xs-12">
+                            <div class="bk-form-content" style="margin-left:100px;">
+                                <button class="bk-button bk-success">查询</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </form>
+            </div>
+        </div>
+        <!-- 主要表格 -->
+        <div class="bk-panel bk-demo">
+            <div class="bk-panel-header" role="tab">
+                <div class="bk-panel-action fl">
+                    <div class="bk-form bk-inline-form bk-form-small">
+                        <div class="bk-form-item is-required">
+                            <div class="bk-form-content">
+                                <input type="text" class="bk-form-input" placeholder="请输入搜索关键字" style="width:290px;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bk-panel-action fr">
+                    <div class="bk-form bk-inline-form bk-form-small">
+                        <div class="bk-form-item is-required">
+                            <div class="bk-form-content">
+                                <button class="bk-button bk-primary bk-button-small" title="入驻新企业">入驻新企业</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bk-panel-body p0">
+                <table class="bk-table has-thead-bordered">
+                    <thead>
+                        <tr>
+                            <th>企业号</th>
+                            <th>联系电话</th>
+                            <th>入驻时间</th>
+                            <th style="width:325px">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>仁良律师</td>
+                            <td>13838383838</td>
+                            <td>2017年08月18日</td>
+                            <td>
+                                <a href="企业管理-基本信息.html" class="bk-text-button">基本信息</a>
+                                <a href="企业管理-短信订单.html" class="bk-text-button">短信订单</a>
+                                <a href="企业管理-电子信函.html" class="bk-text-button">电子信函</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="bk-panel-footer p10">
+                <button class="bk-button bk-default bk-button-small fl" title="下载搜索结果">
+                    下载搜索结果
+                </button>
+                <div class="bk-page bk-compact-page fr">
+                    <ul>
+                        <li class="page-item">
+                            <a href="javascript:void(0);" class="page-button">
+                                <i class="bk-icon icon-angle-left"></i>
+                            </a>
+                        </li>
+                        <li class="page-item">
+                            <a href="javascript:void(0);" class="page-button">1</a>
+                        </li>
+                        <li class="page-item cur-page">
+                            <a href="javascript:void(0);" class="page-button">2</a>
+                        </li>
+                        <li class="page-item">
+                            <a href="javascript:void(0);" class="page-button">3</a>
+                        </li>
+                        <li class="page-item">
+                            <a href="javascript:void(0);" class="page-button">4</a>
+                        </li>
+                        <li class="page-item">
+                            <a href="javascript:void(0);" class="page-button">5</a>
+                        </li>
+                        <li class="page-item">
+                            <a href="javascript:void(0);" class="page-button">6</a>
+                        </li>
+                        <li class="page-item">
+                            <a href="javascript:void(0);" class="page-button">
+                                <i class="bk-icon icon-angle-right"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="js/jquery-1.10.2.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/common.js"></script>
+<script type="text/javascript">
+$('#time .check-list-button').click(function() {
+    $('#time .check-list-button').removeClass('on');
+    $(this).toggleClass('on');
+});
+$('#status .check-list-button').click(function() {
+    $('#status .check-list-button').removeClass('on');
+    $(this).toggleClass('on');
+});
+$('#source .check-list-button').click(function() {
+    $('#source .check-list-button').removeClass('on');
+    $(this).toggleClass('on');
+});
+</script>
+</body>
+
+</html>

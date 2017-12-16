@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>订单管理</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bk_pro.css" rel="stylesheet">
+    <link href="css/iconfont.css" rel="stylesheet">
+    <link href="css/bkDialog.css" rel="stylesheet">
+</head>
+<body class="ffs">
+
+<div class="bk-dialog">
+    <div class="bk-dialog-wrapper">
+        <div class="bk-dialog-position">
+            <div class="bk-dialog-style" style="width: 400px;">
+                <div class="bk-dialog-tool">
+                    <i class="bk-dialog-close" id="bkDialogClose"></i>
+                </div>
+                <div class="bk-dialog-body bk-dialog-default-status" style="">
+                    <div class="bk-dialog-row">
+                        <img src="https://magicbox.bkclouds.cc/static_api/v3/assets/bkDialog-2.0/images/default_loading.png" alt="loading" class="bk-dialog-mark bk-dialog-loading">
+                    </div>
+                    <h3 class="bk-dialog-title bk-dialog-row">loading</h3>
+                    <h5 class="bk-dialog-subtitle bk-dialog-row">请稍等...</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="bk-dialog" style="display: none;">
+    <div class="bk-dialog-wrapper">
+        <div class="bk-dialog-position">
+            <div class="bk-dialog-style" style="width: 400px;">
+                <div class="bk-dialog-tool">
+                    
+                </div>
+                <div class="bk-dialog-body bk-dialog-default-status" style="">
+                    <div class="bk-dialog-row">
+                        <p><i class="bk-icon icon-close bk-dialog-mark bk-dialog-error"></i></p>
+                    </div>
+                    <h3 class="bk-dialog-title bk-dialog-row">添加用户失败</h3>
+                    <h5 class="bk-dialog-subtitle bk-dialog-row">此窗口<span class="bk-dialog-error-text">3s</span>后关闭</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="bk-dialog" style="display: none;">
+    <div class="bk-dialog-wrapper">
+        <div class="bk-dialog-position">
+            <div class="bk-dialog-style" style="width: 400px;">
+                <div class="bk-dialog-tool">
+                    <i class="bk-dialog-close" id="bkDialogClose"></i>
+                </div>
+                <div class="bk-dialog-body bk-dialog-default-status" style="">
+                    <div class="bk-dialog-row">
+                        <p><i class="bk-icon icon-exclamation bk-dialog-mark bk-dialog-warning"></i></p>
+                    </div>
+                    <h3 class="bk-dialog-title bk-dialog-row">此操作存在风险</h3>
+                </div>
+                <div class="bk-dialog-footer ">
+                    <button type="button" name="confirm" class="bk-dialog-btn bk-dialog-btn-confirm bk-btn-primary" style="" id="bkDialogConfirm">确定</button>
+                    <button type="button" name="cancel" class="bk-dialog-btn bk-dialog-btn-cancel" id="bkDialogCancel">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="bk-dialog" style="display: none;">
+    <div class="bk-dialog-wrapper">
+        <div class="bk-dialog-position">
+            <div class="bk-dialog-style" style="width: 400px;">
+                <div class="bk-dialog-tool">
+                    <i class="bk-dialog-close" id="bkDialogClose"></i>
+                </div>
+                <div class="bk-dialog-body bk-dialog-default-status" style="">
+                    <div class="bk-dialog-row">
+                        <p><i class="bk-icon icon-check-1 bk-dialog-mark bk-dialog-success"></i></p>
+                    </div>
+                    <h3 class="bk-dialog-title bk-dialog-row">添加用户成功</h3>
+                    <h5 class="bk-dialog-subtitle bk-dialog-row">辅助信息</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+
+</html>

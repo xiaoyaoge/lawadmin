@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>订单管理</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- <link href="css/bk.css" rel="stylesheet"> -->
+    <link href="css/bk_pro.css" rel="stylesheet">
+    <link href="css/iconfont.css" rel="stylesheet">
+    <link href="css/common.css" rel="stylesheet">
+</head>
+<body class="ffs">
+
+<nav class="bk-horz-nav bk-horz-nav-min">
+    <div class="bk-nav-logo fl">
+        <!-- <img src="https://magicbox.bkclouds.cc/static_api/v3/components_pro/horizontal_nav1/images/logo.png"> -->
+        法法社CRM客户管理系统
+    </div>
+    <div class="bk-nav-user fr">
+        <span class="mr5">admin</span>
+        <img src="https://magicbox.bkclouds.cc/static_api/v3/components_pro/horizontal_nav1/images/avatar.png">
+    </div>
+</nav>
+<div class="bk-layout bk-layout-has-sidebar" style="height:calc(100% - 60px)">
+    <div class="bk-sidebar slide-open">
+        <div class="slide-switch">
+            <i class="icon bk-icon icon-dedent f14"></i>
+        </div>
+        <div class="nav-list">
+            <ul>
+                <li>
+                    <a href="订单管理-短信订单.html">
+                        <span class="icon-box"><i class="bk-icon icon-order"></i></span>
+                        <span class="nav-name">订单管理</span>
+                    </a>
+                    <div class="flex-subnavs">
+                        <a href="订单管理-短信订单.html"><i></i>短信订单</a>
+                        <a href="订单管理-电子信函.html"><i></i>电子信函</a>
+                        <a href="订单管理-纸质信函.html"><i></i>纸质信函</a>
+                        <a href="订单管理-专人律师.html"><i></i>专人律师 </a>
+                    </div>
+                </li>
+                <li class="pureLink open">
+                    <a href="律所管理-律所池.html">
+                        <span class="icon-box"><i class="bk-icon icon-id"></i></span>
+                        <span class="nav-name">律所管理</span>
+                    </a>
+                </li>
+                <li class="pureLink">
+                    <a href="企业管理-企业池.html">
+                        <span class="icon-box"><i class="bk-icon icon-apps"></i></span>
+                        <span class="nav-name">企业管理</span>
+                    </a>
+                </li>
+                <li class="pureLink">
+                    <a href="办公管理.html">
+                        <span class="icon-box"><i class="bk-icon icon-empty"></i></span>
+                        <span class="nav-name">办公管理</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="copyright">
+            <p>Copyright &copy; 2012-2017 法法社.</p>
+            <span>All Rights Reserved.</span>
+        </div>
+    </div>
+    <div class="page-content">
+        <div class="cont-btns mb15">
+            <a class="bk-button bk-default bk-button-small fl" title="返回" href="律所管理-律所池.html"><span>返回</span></a>
+
+            <div class="edit-btns">
+                <!-- 交互说明 
+                     点击修改后，把保存于取消按钮显示出来，同时把info里所有input 的 readonly 去除
+                -->
+                <a class="bk-button bk-primary bk-button-small ml10 fr" title="修改"><span>修改</span></a>
+                <a class="bk-button bk-success bk-button-small ml10 fr" title="保存"><span>保存</span></a>
+                <a class="bk-button bk-default bk-button-small ml10 fr" title="取消"><span>取消</span></a>
+            </div>
+        </div>
+        <div class="info">
+            <div class="cont">
+                <h5>账号信息</h5>
+                <form class="bk-form" id="validate_form" method="POST" action="javascript:;">
+                    <div class="bk-form-item">
+                        <label class="bk-label">账号：</label>
+                        <div class="bk-form-content">
+                            <input type="text" class="bk-form-input" name="" placeholder="" value="13634340013" readonly>
+                        </div>
+                    </div>
+                    <div class="bk-form-item mt5">
+                        <label class="bk-label">密码：</label>
+                        <div class="bk-form-content">
+                            <a data-toggle="modal" data-target="#myModal" class="bk-text-button bk-info ml10" title="重置（身份证后6位）">重置（身份证后6位）</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="cont">
+                <h5>业务信息</h5>
+                <form class="bk-form" id="validate_form" method="POST" action="javascript:;">
+                    <div class="bk-form-item">
+                        <label class="bk-label">订单类型：</label>
+                        <div class="bk-form-content">
+                            <input type="text" class="bk-form-input" name="" placeholder="" value="王尼玛/13634340013" readonly>
+                        </div>
+                    </div>
+                    <div class="bk-form-item mt5">
+                        <label class="bk-label">律所：</label>
+                        <div class="bk-form-content">
+                            <input type="text" class="bk-form-input" name="" placeholder="" value="王尼玛/13634340013" readonly>
+                        </div>
+                    </div>
+                    <div class="bk-form-item mt5">
+                        <label class="bk-label">简述内容：</label>
+                        <div class="bk-form-content">
+                            <input type="text" class="bk-form-input" name="" placeholder="" value="大大大大神，这是什么" readonly>
+                        </div>
+                    </div>
+                    <div class="bk-form-item mt5">
+                        <label class="bk-label">是否有律师接单：</label>
+                        <div class="bk-form-content">
+                            <span class="fb bk-text-info">是</span>
+                            <!-- <span class="fb bk-text-danger">否</span> -->
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="myModal" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+            <h4 class="modal-title" id="mySmallModalLabel">温馨提示</h4>
+        </div>
+        <div class="modal-body">
+            <p>该操作不可恢复，您确认要重置该律所的密码？</p>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            <button type="button" class="btn btn-primary">重置</button>
+        </div>
+    </div>
+  </div>
+</div>
+
+<script src="js/jquery-1.10.2.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/common.js"></script>
+<script type="text/javascript">
+$('#time .check-list-button').click(function() {
+    $('#time .check-list-button').removeClass('on');
+    $(this).toggleClass('on');
+});
+$('#status .check-list-button').click(function() {
+    $('#status .check-list-button').removeClass('on');
+    $(this).toggleClass('on');
+});
+$('#source .check-list-button').click(function() {
+    $('#source .check-list-button').removeClass('on');
+    $(this).toggleClass('on');
+});
+</script>
+</body>
+
+</html>

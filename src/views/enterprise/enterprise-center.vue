@@ -157,14 +157,13 @@ export default {
             this.table.pageNum = val;
             this.getDataList();
         },
-         
         getDataList() {
             let params = {};
             params = {
                 pageSize: this.table.pageSize,
                 pageNum: this.table.pageNum,
                 ename: this.form.ename, //企业名称
-                telephone: this.form.telephone //手机号   
+                telephone: this.form.telephone //手机号
             }
             this.listLoading = true;
             this.$http.ajaxPost({
@@ -183,7 +182,7 @@ export default {
         }
     },
     mounted() {
-        this.getDataList();
+        //this.getDataList();
     }
 }
 </script>

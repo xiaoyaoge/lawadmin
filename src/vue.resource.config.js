@@ -10,10 +10,11 @@ Vue.use(VueResource);
 //Vue.http.options.emulateJSON = true;
 //Vue.http.options.root = 'http://119.23.52.238/cgi-admin/';
 //Vue.http.options.root = 'http://test.admin.fafashe.com/cgi';
-Vue.http.options.root = 'http://admin.fafashe.com/cgi';
-//Vue.http.options.root = 'http://admin.fafashe.twoeyes.cn/cgi';
+//Vue.http.options.root = 'http://admin.fafashe.com/cgi';
+Vue.http.options.root = 'http://test.admin.fafashe.com/cgi';
+//Vue.http.options.root = 'http://admin.fafashe.com/cgi';
+ //Vue.http.options.root = 'http://admin.fafashe.twoeyes.cn/cgi';
 //Vue.http.options.root = 'http://localhost:8080/';
- 
 
 Vue.http.interceptors.push((req, next) => {
     count++;
@@ -32,7 +33,7 @@ Vue.http.aop = function(res, cb) {
                 break;
                 // 未登录
             case 10000:
-                //todo 
+                //todo
                 sessionStorage.removeItem('user');
                 window.location.href = '#/login';
                 Message.warning(res.body.errMsg);
