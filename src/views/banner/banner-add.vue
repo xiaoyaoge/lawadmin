@@ -1,119 +1,37 @@
 <template>
     <section v-loading="listLoading">
         <div class="cont-btns mb15">
-            <a class="bk-button bk-default bk-button-small fl" @click="$router.push('/enterprise')" title="返回">
+            <a class="bk-button bk-default bk-button-small fl" @click="$router.push('/banner')" title="返回">
                 <span>返回</span>
             </a>
         </div>
         <div class="info">
             <div class="bk-panel-body p25 cont">
-                <div class="b-manage-title">
-                    <h5 class="fl">账号信息</h5>
+                <div class="b-manage-title mb5">
                     <div class="edit-btns b-manage-btns fr">
-                        <!-- 交互说明 
+                        <!-- 交互说明
                              点击修改后，把保存于取消按钮显示出来，同时把info里所有input 的 readonly 去除
                         -->
-                        <a class="bk-button bk-success bk-button-small ml10 fr" @click="severInfo" title="保存"><span>保存</span></a>
+                        <a class="bk-button bk-success bk-button-small ml10 fr" @click="severInfo" title="保存"><span>保 存</span></a>
                     </div>
-                </div>
-                <div class="bk-form">
-                    <div class="bk-form-item">
-                        <label class="bk-label"><span class="red">*</span>账号：</label>
-                        <div class="bk-form-content">
-                            <input type="text" class="bk-form-input" v-model="form.account" placeholder="请输入帐号（为手机号）" maxlength="11">
-                        </div>
-                    </div>
-                    <div class="bk-form-item mt5">
-                        <label class="bk-label"><span class="red">*</span>密码：</label>
-                        <div class="bk-form-content">
-                            <div class="bk-text bk-info">
-                                默认为输入的企业法人身份证后6位
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="b-manage-title">
-                    <h5 class="fl">企业信息</h5>
                 </div>
                 <form class="bk-form" id="validate_form" method="POST" action="javascript:;">
                     <div class="bk-form-item">
-                        <label class="bk-label"><span class="red">*</span>企业名称：</label>
+                        <label class="bk-label"><span class="red">*</span>Banner标题：</label>
                         <div class="bk-form-content">
-                            <input type="text" class="bk-form-input" v-model="form.ename" placeholder="请输入企业名称">
-                        </div>
-                    </div>
-                    <div class="bk-form-item mt5">
-                        <label class="bk-label"><span class="red">*</span>企业简称：</label>
-                        <div class="bk-form-content">
-                            <input type="text" class="bk-form-input" v-model="form.shortEname" placeholder="请输入企业简称">
-                        </div>
-                    </div>
-                    <div class="bk-form-item mt5">
-                        <label class="bk-label"><span class="red">*</span>注册地址：</label>
-                        <div class="bk-form-content">
-                            <el-cascader size="large" class="mb5" :options="provinceAndCityDataPlus" filterable v-model="registerAddress" @change="handleChange">
-                            </el-cascader>
-                            <span class="none">{{CodeToText[registerAddress[0]]}}{{CodeToText[registerAddress[1]]}}{{CodeToText[registerAddress[2]]}}</span>
-                            <input type="text" class="bk-form-input" placeholder="请输入详细地址" v-model="form.registerAddress">
-                        </div>
-                    </div>
-                    <div class="bk-form-item mt5">
-                        <label class="bk-label"><span class="red">*</span>实际经营地址：</label>
-                        <div class="bk-form-content">
-                            <el-cascader size="large" class="mb5" :options="provinceAndCityDataPlus" filterable v-model="address" @change="handleChange">
-                            </el-cascader>
-                            <span class="none">{{CodeToText[address[0]]}}{{CodeToText[address[1]]}}{{CodeToText[address[2]]}}</span>
-                            <input type="text" class="bk-form-input" name="" placeholder="请输入详细地址：" v-model="form.address">
-                        </div>
-                    </div>
-                    <div class="bk-form-item mt5">
-                        <label class="bk-label"><span class="red">*</span>统一社会信用代码：</label>
-                        <!-- <label class="bk-label">营业执照编号：</label> -->
-                        <div class="bk-form-content">
-                            <input type="text" class="bk-form-input" placeholder="请输入统一社会信用代码" v-model="form.licenseNumber" maxlength="18">
-                        </div>
-                    </div>
-                    <div class="bk-form-item mt5">
-                        <label class="bk-label"><span class="red">*</span>纳税人识别号：</label>
-                        <div class="bk-form-content">
-                            <input type="text" class="bk-form-input" placeholder="请输入纳税人识别号" v-model="form.taxpayerNumber" maxlength="15">
-                        </div>
-                    </div>
-                    <div class="bk-form-item mt5">
-                        <label class="bk-label"><span class="red">*</span>法人姓名：</label>
-                        <div class="bk-form-content">
-                            <input type="text" class="bk-form-input" placeholder="请输入法人姓名" v-model="form.legalPersonName" maxlength="10">
-                        </div>
-                    </div>
-                    <div class="bk-form-item mt5">
-                        <label class="bk-label"><span class="red">*</span>法人身份证：</label>
-                        <div class="bk-form-content">
-                            <input type="text" class="bk-form-input" placeholder="请输入法人身份证" v-model="form.legalPersonIdCard" maxlength="18">
-                        </div>
-                    </div>
-                    <div class="bk-form-item mt5">
-                        <label class="bk-label"><span class="red">*</span>企业联系人：</label>
-                        <div class="bk-form-content">
-                            <input type="text" class="bk-form-input" placeholder="请输入业联系人" v-model="form.linkman" maxlength="10">
-                        </div>
-                    </div>
-                    <div class="bk-form-item mt5">
-                        <label class="bk-label"><span class="red">*</span>企业联系电话：</label>
-                        <div class="bk-form-content">
-                            <input type="text" class="bk-form-input" placeholder="请输入企业联系电话" v-model="form.telephone" >
+                            <input type="text" class="bk-form-input" v-model="form.ename" placeholder="请输入banner标题">
                         </div>
                     </div>
                 </form>
             </div>
             <div class="cont">
                 <div class="b-manage-title mb5">
-                    <h5 class="fl">图片信息</h5>
+                    <h5 class="fl">Banner图片</h5>
                     <div class="edit-btns b-manage-btns fr">
                     </div>
                 </div>
                 <div class="row img-wrap">
                     <div class="col-md-3 col-lg-3">
-                        <div class="img-title">企业营业执照(必填)</div>
                         <div class="img-box">
                             <img :src="form.licensePic||defaultImgUrl">
                         </div>
@@ -123,48 +41,6 @@
                             </div>
                             <div class="col-md-6 col-lg-6">
                                 <a class="bk-button bk-default" @click="previewBox('企业营业执照',(form.licensePic||defaultImgUrl))" target="_blank">预览照片</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-lg-3">
-                        <div class="img-title">企业印章图样(必填)</div>
-                        <div class="img-box">
-                            <img :src="form.sealPic||defaultImgUrl">
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6 col-lg-6">
-                                <a class="bk-button bk-primary" @click="modifyUpload('企业印章图样','sealPic')">{{form.sealPic?'修改照片':'上传照片'}}</a>
-                            </div>
-                            <div class="col-md-6 col-lg-6">
-                                <a class="bk-button bk-default" @click="previewBox('企业印章图样',(form.sealPic||defaultImgUrl))" target="_blank">预览照片</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-lg-3">
-                        <div class="img-title">企业签约协议1(选填)</div>
-                        <div class="img-box">
-                            <img :src="form.agreementPic||defaultImgUrl">
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6 col-lg-6">
-                                <a class="bk-button bk-primary" @click="modifyUpload('企业签约协议1','agreementPic')">{{form.agreementPic?'修改照片':'上传照片'}}</a>
-                            </div>
-                            <div class="col-md-6 col-lg-6">
-                                <a class="bk-button bk-default" @click="previewBox('企业签约协议1',(form.agreementPic||defaultImgUrl))" target="_blank">预览照片</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-lg-3">
-                        <div class="img-title">企业签约协议2(选填)</div>
-                        <div class="img-box">
-                            <img :src="form.agreement2Pic||defaultImgUrl">
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6 col-lg-6">
-                                <a class="bk-button bk-primary" @click="modifyUpload('企业签约协议2','agreement2Pic')">{{form.agreement2Pic?'修改照片':'上传照片'}}</a>
-                            </div>
-                            <div class="col-md-6 col-lg-6">
-                                <a class="bk-button bk-default" @click="previewBox('企业签约协议2',(form.agreement2Pic||defaultImgUrl))" target="_blank">预览照片</a>
                             </div>
                         </div>
                     </div>
@@ -481,8 +357,8 @@ export default {
 
     },
     mounted() {
-        this.$parent.parentUrlName = "企业管理";
-        this.$parent.parentUrls = '/enterprise';
+        this.$parent.parentUrlName = "首页管理";
+        this.$parent.parentUrls = '/banner';
 
     }
 }

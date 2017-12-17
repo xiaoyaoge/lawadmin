@@ -3,7 +3,7 @@
         <div class="bk-panel bk-demo">
             <div class="bk-panel-header" role="tab">
                 <div class="bk-panel-info fl">
-                    <div class="panel-title">管理员</div>
+                    <div class="panel-title">用户</div>
                     <div class="panel-subtitle"></div>
                 </div>
                 <div class="bk-panel-action fr">

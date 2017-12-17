@@ -6,7 +6,7 @@
             </div>
             <ul class="ffs-breadcrumb">
                 <li class="fir">
-                    <router-link :to="{pat:'#/'}">首页</router-link>
+                    <router-link :to="{pat:'#/banner'}">首页</router-link>
                 </li>
                 <li class="sec">
                     <a v-if="$route.path.split('/')[2]" @click="$router.push(parentUrls)">{{parentUrlName}}</a>

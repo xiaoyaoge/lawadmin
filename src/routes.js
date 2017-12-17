@@ -18,6 +18,8 @@ import NewsAdd from './views/news/news-add.vue'
 import NewsEdit from './views/news/news-edit.vue'
 import NewsList from './views/news/news-list.vue'
 import Banner from './views/banner/banner.vue'
+import BannerAdd from './views/banner/banner-add.vue'
+import Customer from './views/user/customer.vue'
 
 let routes = [{
         path: '/login',
@@ -32,30 +34,32 @@ let routes = [{
         name: '',
         role: 0,
         hidden: true
-    }, {
+    },
+    {
         path: '/',
         component: Home,
-        name: '管理员',
-        iconCls: 'icon-empty',
+        name: '首页banner管理',
+        iconCls: 'icon-home',
         hidden: false,
         leaf: true, //只有一个节点
-        paths: '/manager',
+        paths: '/banner,/banner/add',
         role: 99,
         children: [
-            { path: '/manager', component: UserCenter, name: '账号管理' }
+            { path: '/banner', component: Banner, name: '首页管理' },
+            { path: '/banner/add', component: BannerAdd, name: '添加Banner', hidden: true }
         ]
     },
     {
         path: '/',
         component: Home,
-        name: 'banner管理',
-        iconCls: 'icon-id',
+        name: '仁良律师',
+        iconCls: 'icon-user',
         hidden: false,
         leaf: true, //只有一个节点
-        paths: '/banner',
+        paths: '/lawMannger',
         role: 99,
         children: [
-            { path: '/banner', component: Banner, name: 'banner管理' },
+            { path: '/lawMannger', component: LawUser, name: '仁良律师' }
 
         ]
     },
@@ -78,32 +82,17 @@ let routes = [{
     {
         path: '/',
         component: Home,
-        name: '仁良律师',
+        name: '管理员',
         iconCls: 'icon-id',
         hidden: false,
-        leaf: true, //只有一个节点
-        paths: '/lawMannger',
+        leaf: false, //只有一个节点
+        paths: '/manager',
         role: 99,
         children: [
-            { path: '/lawMannger', component: LawUser, name: '仁良律师' }
-
+            { path: '/manager', component: UserCenter, name: '管理员' },
+            { path: '/customer', component: Customer, name: '注册用户' }
         ]
     },
-    // {
-    //     path: '/',
-    //     component: Home,
-    //     name: '律所管理',
-    //     iconCls: 'icon-id',
-    //     hidden: false,
-    //     leaf: true, //只有一个节点
-    //     paths: '/lawFirm',
-    //     role: 99,
-    //     children: [
-    //         { path: '/lawFirm', component: LawFirm, name: '仁良律所' }
-
-    //     ]
-    // },
-
     {
         path: '/',
         component: Home,
@@ -123,6 +112,21 @@ let routes = [{
 
         ]
     },
+    // {
+    //     path: '/',
+    //     component: Home,
+    //     name: '律所管理',
+    //     iconCls: 'icon-id',
+    //     hidden: false,
+    //     leaf: true, //只有一个节点
+    //     paths: '/lawFirm',
+    //     role: 99,
+    //     children: [
+    //         { path: '/lawFirm', component: LawFirm, name: '仁良律所' }
+
+    //     ]
+    // },
+
     // {
     //     path: '/',
     //     component: Home,
