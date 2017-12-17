@@ -332,15 +332,11 @@ export default {
                         });
                     });
                 }
-            }); 
+            });
         }
     },
     mounted() {
-<<<<<<< HEAD
-        this.getDataList();
-=======
         //this.getDataList();
->>>>>>> d763f09890ecc367b299ea7db98e0e2f4e63f8e8
     }
 }
 </script>

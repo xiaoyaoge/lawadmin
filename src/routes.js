@@ -13,7 +13,11 @@ import EnterMsg from './views/enterprise/enterprise-msg.vue'
 import EnterEmail from './views/enterprise/enterprise-email.vue'
 import EnterLetter from './views/enterprise/enterprise-letter.vue'
 import LawFirm from './views/firm/law-firm.vue'
-import NewsAdd from './views/news/add.vue'
+import LawUser from './views/firm/law-user.vue'
+import NewsAdd from './views/news/news-add.vue'
+import NewsEdit from './views/news/news-edit.vue'
+import NewsList from './views/news/news-list.vue'
+import Banner from './views/banner/banner.vue'
 
 let routes = [{
         path: '/login',
@@ -31,28 +35,42 @@ let routes = [{
     }, {
         path: '/',
         component: Home,
-        name: '办公管理',
+        name: '管理员',
         iconCls: 'icon-empty',
         hidden: false,
         leaf: true, //只有一个节点
         paths: '/manager',
         role: 99,
         children: [
-            { path: '/manager', component: UserCenter, name: '办公管理' }
+            { path: '/manager', component: UserCenter, name: '账号管理' }
+        ]
+    },
+    {
+        path: '/',
+        component: Home,
+        name: 'banner管理',
+        iconCls: 'icon-id',
+        hidden: false,
+        leaf: true, //只有一个节点
+        paths: '/banner',
+        role: 99,
+        children: [
+            { path: '/banner', component: Banner, name: 'banner管理' },
+
         ]
     },
     {
         path: '/',
         component: Home,
         name: '新闻管理',
-        iconCls: 'icon-id',
+        iconCls: 'icon-apps',
         hidden: false,
-        leaf: false, //只有一个节点
-        paths: '/news',
+        leaf: true, //只有一个节点
+        paths: '/news,/news/add,/news/edit',
         role: 99,
         children: [
-            { path: '/news', component: NewsAdd, name: '新闻管理' },
-            { path: '/news/add', component: NewsAdd, name: '新闻管理' },
+            { path: '/news', component: NewsList, name: '新闻管理' },
+            { path: '/news/add', component: NewsEdit, name: '新闻管理' },
             { path: '/news/edit', component: NewsAdd, name: '新闻管理' }
 
         ]
@@ -60,17 +78,31 @@ let routes = [{
     {
         path: '/',
         component: Home,
-        name: '律所管理',
+        name: '仁良律师',
         iconCls: 'icon-id',
         hidden: false,
         leaf: true, //只有一个节点
-        paths: '/lawFirm',
+        paths: '/lawMannger',
         role: 99,
         children: [
-            { path: '/lawFirm', component: LawFirm, name: '仁良律所' }
+            { path: '/lawMannger', component: LawUser, name: '仁良律师' }
 
         ]
     },
+    // {
+    //     path: '/',
+    //     component: Home,
+    //     name: '律所管理',
+    //     iconCls: 'icon-id',
+    //     hidden: false,
+    //     leaf: true, //只有一个节点
+    //     paths: '/lawFirm',
+    //     role: 99,
+    //     children: [
+    //         { path: '/lawFirm', component: LawFirm, name: '仁良律所' }
+
+    //     ]
+    // },
 
     {
         path: '/',
@@ -91,35 +123,22 @@ let routes = [{
 
         ]
     },
-    {
-        path: '/',
-        component: Home,
-        name: '订单管理',
-        iconCls: 'icon-order', //图标样式class
-        leaf: false, //只有一个节点
-        hidden: false,
-        paths: '/msgOder,/emailOder,/letterOder',
-        role: 0,
-        children: [
-            { path: '/msgOder', component: OrderMsg, name: '短信订单' },
-            { path: '/emailOder', component: OrderEmail, name: '电子信函' },
-            { path: '/letterOder', component: OderLetter, name: '信函下载' }
+    // {
+    //     path: '/',
+    //     component: Home,
+    //     name: '订单管理',
+    //     iconCls: 'icon-order', //图标样式class
+    //     leaf: false, //只有一个节点
+    //     hidden: false,
+    //     paths: '/msgOder,/emailOder,/letterOder',
+    //     role: 0,
+    //     children: [
+    //         { path: '/msgOder', component: OrderMsg, name: '短信订单' },
+    //         { path: '/emailOder', component: OrderEmail, name: '电子信函' },
+    //         { path: '/letterOder', component: OderLetter, name: '信函下载' }
 
-        ]
-    },
-    {
-        path: '/',
-        component: Home,
-        name: '办公管理',
-        iconCls: 'icon-empty',
-        hidden: false,
-        leaf: true, //只有一个节点
-        paths: '/manager',
-        role: 99,
-        children: [
-            { path: '/manager', component: UserCenter, name: '办公管理' }
-        ]
-    },
+    //     ]
+    // },
     {
         path: '*',
         hidden: true,

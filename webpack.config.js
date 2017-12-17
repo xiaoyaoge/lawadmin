@@ -6,11 +6,7 @@ const WebpackMd5Hash = require('webpack-md5-hash')
 const InlineManifestWebpackPlugin = require('inline-manifest-webpack-plugin')
 const CompressionWebpackPlugin = require('compression-webpack-plugin');
 const url = require('url')
-<<<<<<< HEAD
-const publicPath = '/'
-=======
 const publicPath = ''
->>>>>>> d763f09890ecc367b299ea7db98e0e2f4e63f8e8
 
 module.exports = (options = {}) => ({
     entry: {
@@ -22,11 +18,7 @@ module.exports = (options = {}) => ({
         filename: options.dev ? '[name].js' : '[name].[chunkhash:8].js',
         chunkFilename: '[id].[chunkhash:8].js',
         publicPath: options.dev ? '/assets/' : publicPath
-<<<<<<< HEAD
     },
-=======
-    }, 
->>>>>>> d763f09890ecc367b299ea7db98e0e2f4e63f8e8
     module: {
         rules: [{
             test: /\.vue$/,
@@ -37,11 +29,7 @@ module.exports = (options = {}) => ({
             exclude: /node_modules/
         }, {
             test: /\.css$/,
-<<<<<<< HEAD
-            loader: ExtractTextPlugin.extract({ fallback: 'style-loader', use:['css-loader','postcss-loader']})
-=======
             use: ['style-loader', 'css-loader', 'postcss-loader'],
->>>>>>> d763f09890ecc367b299ea7db98e0e2f4e63f8e8
 
         }, {
             test: /\.(png|jpg|jpeg|gif)(\?.+)?$/,
@@ -75,22 +63,22 @@ module.exports = (options = {}) => ({
             ),
             threshold: 10240,
             minRatio: 0.8
-        }), 
+        }),
         new HtmlWebpackPlugin({
             template: 'src/index.html',
             inject: true, // 自动注入
             minify: {
                 removeComments: true, //去注释
                 collapseWhitespace: true, //压缩空格
-                removeAttributeQuotes: true //去除属性引用 
+                removeAttributeQuotes: true //去除属性引用
             },
             //必须通过上面的 CommonsChunkPlugin 的依赖关系自动添加 js，css 等
             chunksSortMode: 'dependency'
         }),
-        new ExtractTextPlugin({ filename: 'css/[name].[contenthash:8].css' }), 
+        new ExtractTextPlugin({ filename: 'css/[name].[contenthash:8].css' }),
         new webpack.optimize.CommonsChunkPlugin({
             names: ['vendor', 'manifest']
-        }), 
+        }),
         new InlineManifestWebpackPlugin({
             name: 'webpackManifest'
         })
@@ -102,11 +90,7 @@ module.exports = (options = {}) => ({
     },
     devServer: {
         host: '127.0.0.1',
-<<<<<<< HEAD
-        port: 8021,
-=======
         port: 8023,
->>>>>>> d763f09890ecc367b299ea7db98e0e2f4e63f8e8
         proxy: {
             '/api/': {
                 target: '127.0.0.1',
