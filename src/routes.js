@@ -3,23 +3,33 @@ import NotFound from './views/404.vue'
 import Home from './views/Home.vue'
 import Main from './views/Main.vue'
 import UserCenter from './views/user/user-center.vue'
+import Customer from './views/user/customer.vue'
+
 import OrderMsg from './views/order/order-msg.vue'
 import OrderEmail from './views/order/order-email.vue'
 import OderLetter from './views/order/order-letter.vue'
+
 import Enterprise from './views/enterprise/enterprise-center.vue'
 import EnterInfo from './views/enterprise/enterprise-info.vue'
 import EnterForm from './views/enterprise/enterprise-form.vue'
 import EnterMsg from './views/enterprise/enterprise-msg.vue'
 import EnterEmail from './views/enterprise/enterprise-email.vue'
 import EnterLetter from './views/enterprise/enterprise-letter.vue'
+
 import LawFirm from './views/firm/law-firm.vue'
-import LawUser from './views/firm/law-user.vue'
+import LawyerUser from './views/firm/lawyer-user.vue'
+import LawyerAdd from './views/firm/lawyer-add.vue'
+import LawyerEdit from './views/firm/lawyer-edit.vue'
+
 import NewsAdd from './views/news/news-add.vue'
 import NewsEdit from './views/news/news-edit.vue'
 import NewsList from './views/news/news-list.vue'
+
 import Banner from './views/banner/banner.vue'
 import BannerAdd from './views/banner/banner-add.vue'
-import Customer from './views/user/customer.vue'
+import BannerEdit from './views/banner/banner-info.vue'
+
+
 
 let routes = [{
         path: '/login',
@@ -42,11 +52,12 @@ let routes = [{
         iconCls: 'icon-home',
         hidden: false,
         leaf: true, //只有一个节点
-        paths: '/banner,/banner/add',
+        paths: '/banner,/banner/add,/banner/edit',
         role: 99,
         children: [
             { path: '/banner', component: Banner, name: '首页管理' },
-            { path: '/banner/add', component: BannerAdd, name: '添加Banner', hidden: true }
+            { path: '/banner/add', component: BannerAdd, name: '添加Banner', hidden: true },
+            { path: '/banner/edit/:id', component: BannerEdit, name: '编辑Banner', hidden: true }
         ]
     },
     {
@@ -56,10 +67,12 @@ let routes = [{
         iconCls: 'icon-user',
         hidden: false,
         leaf: true, //只有一个节点
-        paths: '/lawMannger',
+         paths: '/lawyer,/lawyer/add,/lawyer/edit',
         role: 99,
         children: [
-            { path: '/lawMannger', component: LawUser, name: '仁良律师' }
+            { path: '/lawyer', component: LawyerUser, name: '仁良律师' },
+            { path: '/lawyer/add', component: LawyerAdd, name: '添加律师', hidden: true },
+            { path: '/lawyer/edit/:id', component: LawyerEdit, name: '编辑律师信息', hidden: true }
 
         ]
     },
@@ -70,12 +83,12 @@ let routes = [{
         iconCls: 'icon-apps',
         hidden: false,
         leaf: true, //只有一个节点
-        paths: '/news,/news/add,/news/edit',
+        paths: '/news,/news/add,/news/info',
         role: 99,
         children: [
             { path: '/news', component: NewsList, name: '新闻管理' },
-            { path: '/news/add', component: NewsEdit, name: '新闻管理' },
-            { path: '/news/edit', component: NewsAdd, name: '新闻管理' }
+            { path: '/news/add', component: NewsAdd, name: '添加新闻' },
+            { path: '/news/info/:id', component: NewsEdit, name: '编辑新闻' }
 
         ]
     },
@@ -99,7 +112,7 @@ let routes = [{
         name: '企业管理',
         iconCls: 'icon-apps',
         leaf: true, //只有一个节点
-        hidden: false,
+        hidden: true,
         paths: '/enterprise,/enterInfo/,/enterMsg/,/enterEmail/,/enterLetter/',
         role: 0,
         children: [

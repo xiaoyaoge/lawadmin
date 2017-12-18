@@ -1,5 +1,24 @@
 <template>
     <section>
+        <div class="bk-panel mb20">
+            <div class="bk-panel-body p25">
+                <form class="bk-form" :model="form" @submit="onSubmit">
+                    <div class="row more-query-cont">
+                        <div class="col-md-4 col-lg-4 col-xs-4">
+                            <div class="bk-form-item">
+                                <label class="bk-label pr15" style="width:100px;">用户手机号：</label>
+                                <div class="bk-form-content" style="margin-left:100px;">
+                                    <input type="text" v-model="form.mobile" class="bk-form-input" placeholder="请输入用户手机号" style="width:100%;">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-lg-4 col-xs-4">
+                            <button class="bk-button bk-success">查询</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
         <div class="bk-panel bk-demo">
             <div class="bk-panel-header" role="tab">
                 <div class="bk-panel-info fl">
@@ -7,7 +26,7 @@
                     <div class="panel-subtitle"></div>
                 </div>
                 <div class="bk-panel-action fr">
-                    <button id="addUser" class="bk-button bk-primary bk-button-small" @click="handleAdd" title="新增">新增</button>
+                    <button v-if="false" id="addUser" class="bk-button bk-primary bk-button-small" @click="handleAdd" title="新增">新增</button>
                 </div>
             </div>
             <div class="bk-panel-body" v-loading="listLoading">
@@ -21,16 +40,16 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="(item,index) in dataList"> 
+                        <tr v-for="(item,index) in dataList">
                             <td>{{item.name}}</td>
                             <td>{{item.mobile}}</td>
-                             <td>{{dateTime(item.modifyTime)}}</td>
+                            <td>{{dateTime(item.modifyTime)}}</td>
                             <td>
-                                <a class="bk-icon-button bk-warning bk-button-mini" title="修改" @click="handleEdit(index, item)">
+                                <!-- <a class="bk-icon-button bk-warning bk-button-mini" title="修改" @click="handleEdit(index, item)">
                                     <i class="bk-icon icon-edit bk-icon"></i>
                                     <i class="bk-text">修改</i>
-                                </a>
-                                <a class="bk-icon-button bk-danger bk-button-mini" title="关闭" @click="handleDel(index,item)">
+                                </a> -->
+                                <a class="bk-icon-button bk-danger bk-button-mini" title="删除" @click="handleDel(index,item)">
                                     <i class="bk-icon icon-close bk-icon"></i>
                                     <i class="bk-text">删除</i>
                                 </a>
@@ -116,6 +135,9 @@ export default {
             total: 0,
             pageSize: 10,
             pageNum: 1,
+            form: {
+                mobile: ''
+            },
             listLoading: false,
             sels: [], //列表选中列 
             editFormVisible: false, //编辑界面是否显示 
@@ -188,7 +210,7 @@ export default {
 
         }
     },
-    methods: { 
+    methods: {
         dateTime(val) {
             return moment(val).format('YYYY-MM-DD HH:mm:ss');
         },
@@ -211,12 +233,13 @@ export default {
             if (this.user) {
                 params = {
                     pageSize: this.pageSize,
-                    pageNum: this.pageNum
+                    pageNum: this.pageNum,
+                    mobile: this.form.mobile
                 }
             }
             this.listLoading = true;
             this.$http.ajaxPost({
-                url: 'admin/query',
+                url: 'user/query',
                 params: params
             }, (res) => {
                 this.$http.aop(res, () => {
@@ -232,10 +255,10 @@ export default {
                 type: 'warning'
             }).then(() => {
                 let para = {
-                    mid: row.mid
+                    uid: row.uid
                 };
                 this.$http.ajaxPost({
-                    url: 'admin/delete',
+                    url: 'user/delete',
                     params: para
                 }, (res) => {
                     this.$http.aop(res, () => {
@@ -280,7 +303,7 @@ export default {
                         let para = Object.assign({}, this.editForm);
                         para.role = ((this.orderType === '超级管理员') ? 99 : 1);
                         this.$http.ajaxPost({
-                            url: 'admin/modify',
+                            url: 'user/modify',
                             params: para
                         }, (res) => {
                             this.$http.aop(res, () => {
@@ -311,7 +334,7 @@ export default {
                         let para = Object.assign({}, this.addForm);
                         para.role = ((this.orderType === '超级管理员') ? 99 : 1);
                         this.$http.ajaxPost({
-                            url: 'admin/create',
+                            url: 'user/create',
                             params: para
                         }, (res) => {
                             this.$http.aop(res, () => {
@@ -333,8 +356,12 @@ export default {
                     });
                 }
             });
+        },
+        onSubmit() {
+            this.getDataList();
         }
     },
+
     mounted() {
         this.getDataList();
     }

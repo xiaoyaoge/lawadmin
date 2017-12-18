@@ -62,11 +62,11 @@ export default {
                             sessionStorage.setItem('user', JSON.stringify(res.body.data));
                             if (res.body.data.role == 99) {
                                 this.$router.push({
-                                    path: '/lawFirm'
+                                    path: '/banner'
                                 });
                             } else {
                                 this.$router.push({
-                                    path: '/enterprise'
+                                    path: '/banner'
                                 });
                             }
 

@@ -30,16 +30,18 @@
                         </thead>
                         <tbody v-if="table.dataList.length>0">
                             <tr v-for="(item,index) in table.dataList">
-                                <td>{{item.ename}}</td>
-                                <td>{{item.telephone}}</td>
+                                <td>
+                                    <div style="width:200px; height:40px; overflow: hidden; text-overflow:ellipsis; white-space: nowrap;">{{item.title}}</div>
+                                </td>
+                                <td><img :src="item.imageUrl+'?x-oss-process=image/resize,h_40/auto-orient,1/quality,q_90'" height="40" /></td>
                                 <td>{{dateTime(item.createTime)}}</td>
                                 <td>
-                                    <router-link :to="{path:'/enterprise/enterInfo/'+item.eid}" class="bk-text-button" title="基本信息">
-                                        编辑
+                                    <router-link :to="{path:'/banner/edit/'+item.bid}" class="bk-text-button" title="基本信息">
+                                        基本信息
                                     </router-link>
-                                    <router-link :to="{path:'/enterprise/enterMsg/'+item.eid}" class="bk-text-button" title="短信订单">
+                                    <a class="bk-text-button" @click="handleDel(item)" title="删除">
                                         删除
-                                    </router-link>
+                                    </a>
                                 </td>
                             </tr>
                         </tbody>
@@ -106,6 +108,34 @@ export default {
                     return '';
             }
         },
+        //删除
+        handleDel: function(row) {
+            this.$confirm('确认删除该记录吗?', '提示', {
+                type: 'warning'
+            }).then(() => {
+                let para = {
+                    bid: row.bid
+                };
+                this.$http.ajaxPost({
+                    url: 'banner/delete',
+                    params: para
+                }, (res) => {
+                    this.$http.aop(res, () => {
+                        this.$message({
+                            message: '删除成功',
+                            type: 'success'
+                        });
+                        this.getDataList();
+                    });
+                });
+
+            }).catch(() => {
+                this.$message({
+                    type: 'info',
+                    message: '已取消'
+                });
+            });
+        },
         handleCurrentChange(val) {
             this.table.pageNum = val;
             this.getDataList();
@@ -120,12 +150,12 @@ export default {
             }
             this.listLoading = true;
             this.$http.ajaxPost({
-                url: 'enterprise/query',
+                url: 'banner/query',
                 params: params
             }, (res) => {
                 this.$http.aop(res, () => {
                     this.table.total = res.body.data.total;
-                    this.table.dataList = res.body.data.enterpriseInfoList || [];
+                    this.table.dataList = res.body.data.bannerInfoList || [];
                     this.listLoading = false;
                 });
             });
@@ -135,7 +165,7 @@ export default {
         }
     },
     mounted() {
-        //this.getDataList();
+        this.getDataList();
     }
 }
 </script>

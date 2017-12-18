@@ -1,34 +1,59 @@
 <template>
     <div class="user-info bg_w">
+        <div class="cont-btns mb15">
+            <a class="bk-button bk-default bk-button-small fl" @click="$router.push('/news')" title="返回">
+                <span>返回</span>
+            </a>
+        </div>
         <div class="wrap">
-            <el-form :model="email" label-width="100px" class="demo-ruleForm">
-                <!--:rules="rules" -->
-                <!--ref="ruleForm" -->
-                <el-form-item label="类型" class="news-type">
-                    <el-select v-model="news.type" placeholder="请选择">
-                        <el-option label="请选择" value="null"></el-option>
-                        <el-option label="公告" value="1"></el-option>
-                        <el-option label="活动" value="2"></el-option>
-                        <!--<el-option-->
-                        <!--v-for="item in options"-->
-                        <!--:key="item.value"-->
-                        <!--:label="item.label"-->
-                        <!--:value="item.value">-->
-                        <!--</el-option>-->
-                    </el-select>
-                </el-form-item>
-                <el-form-item label="标题">
-                    <el-input v-model="news.title" placeholder="请输入标题"></el-input>
-                </el-form-item>
-                <el-form-item label="内容">
-                    <quill-editor ref="myTextEditor" v-model="news.content" :config="editorOption" @blur="onEditorBlur($event)" @focus="onEditorFocus($event)" @ready="onEditorReady($event)">
-                    </quill-editor>
-                </el-form-item>
-                <el-form-item>
-                    <el-button type="primary" @click.native="doSave">提交</el-button>
-                    <!--<el-button @click="resetForm('ruleForm2')">重置</el-button>-->
-                </el-form-item>
-            </el-form>
+            <div class="bk-panel-body p25 cont">
+                <div class="b-manage-title mb5">
+                    <h5 class="fl">添加新闻</h5>
+                    <div class="edit-btns b-manage-btns fr">
+                        <!-- 交互说明
+                             点击修改后，把保存于取消按钮显示出来，同时把info里所有input 的 readonly 去除
+                        -->
+                    </div>
+                </div>
+                <form class="bk-form" id="validate_form" method="POST" action="javascript:;">
+                    <div class="bk-form-item">
+                        <label class="bk-label"><span class="red">*</span>新闻标题：</label>
+                        <div class="bk-form-content">
+                            <el-input type="text" v-model="news.title" placeholder="请输入新闻简介"></el-input> 
+                        </div>
+                    </div>
+                    <div class="bk-form-item mt5">
+                        <label class="bk-label"><span class="red">*</span>新闻类型：</label>
+                        <div class="bk-form-content">
+                            <el-select v-model="news.category" placeholder="请选择">
+                                <el-option label="请选择" value=""></el-option>
+                                <el-option label="仁良业绩" value="1"></el-option>
+                                <el-option label="业内资讯" value="2"></el-option>
+                            </el-select>
+                            
+                        </div>
+                    </div>
+                    <div class="bk-form-item mt5">
+                        <label class="bk-label"><span class="red">*</span>新闻简介：</label>
+                        <div class="bk-form-content">
+                            <el-input type="textarea" v-model="news.brief" placeholder="请输入新闻简介"></el-input>
+                        </div>
+                    </div>
+                    <div class="bk-form-item mt5">
+                        <label class="bk-label"><span class="red">*</span>新闻内容：</label>
+                        <div class="bk-form-content">
+                            <quill-editor ref="myTextEditor" v-model="news.content" :config="editorOption" @blur="onEditorBlur($event)" @focus="onEditorFocus($event)" @ready="onEditorReady($event)"></quill-editor>
+                            
+                        </div>
+                    </div>
+                    <div class="bk-form-item mt5">
+                        <label class="bk-label">&nbsp;</label>
+                        <div class="bk-form-content">
+                            <el-button type="primary" @click.native="doSave">提交</el-button>
+                        </div>
+                    </div>
+                </form> 
+            </div>
         </div>
     </div>
 </template>
@@ -36,17 +61,16 @@
 import { quillEditor } from 'vue-quill-editor'
 export default {
     name: 'Index',
-    //注册组件：Message方便使用
     components: {
         'quillEditor': quillEditor
-        //        Message
     },
     data() {
-        return {
-            email: {},
+        return { 
             news: {
+                title: '',
+                brief: '',
                 content: "",
-                type: null
+                category: null
             },
             editorOption: {
                 theme: 'snow',
@@ -76,27 +100,86 @@ export default {
             console.log('editor ready!', editor)
         },
         onEditorChange({ editor, html, text }) {
-            // console.log('editor change!', editor, html, text)
-            this.content = html
+            console.log('editor change!', editor, html, text)
+            this.news.content = html
+        },
+        checkForm(data) { //验证担保人信息
+            let isOk = true;
+            let text = '';
+            Object.keys(data).forEach((val) => {
+                switch (val) {
+                    case 'title':
+                        if (data[val] === '') {
+                            text = '标题不能为空';
+                            isOk = false;
+                        }
+                        break;
+                    case 'category':
+                        if (data[val] === '') {
+                            text = '请选着类别';
+                            isOk = false;
+                        }
+                        break;
+                    case 'brief':
+                        if (data[val] === '') {
+                            text = '请输入简介';
+                            isOk = false;
+                        }
+                        break;
+                    case 'content':
+                        if (data[val] === '') {
+                            text = '请输入内容';
+                            isOk = false;
+                        }
+                        break;
+                }
+            });
+            if (!isOk) {
+                this.$message.error(text);
+                return false;
+            }
+            return true;
         },
         doSave() {
             let that = this
             let url = '/news/add'
             var reqData = {
-                userId: auth.getUser().id,
+                title: this.news.title,
+                brief: this.news.brief,
+                content: this.news.content,
+                category: this.news.category
             }
-            Object.assign(reqData, that.news)
-            that.$http.post(url, reqData).then(function(res) {
-                if (res.body.msg == "ok") {
-                    this.$notify({
-                        title: '成功',
-                        message: '添加成功',
-                        type: 'success'
+            console.log(reqData);
+            //return;
+            if (this.checkForm(reqData)) {
+                this.$confirm('确认提创建吗？', '提示', {}).then(() => {
+                    this.listLoading = true;
+                    this.$http.ajaxPost({
+                        url: 'news/create',
+                        params: params
+                    }, (res) => {
+                        this.$http.aop(res, () => {
+                            this.$message({
+                                message: '入驻成功',
+                                type: 'success'
+                            });
+                            this.$router.push('/news');
+                        });
+                        this.listLoading = false;
                     });
+                }).catch(() => {
+                    this.$message({
+                        type: 'info',
+                        message: '已取消'
+                    });
+                });
+            }
 
-                }
-            });
         }
+    },
+    mounted() {
+        this.$parent.parentUrlName = "新闻管理";
+        this.$parent.parentUrls = '/news';
     }
 }
 </script>
@@ -144,9 +227,10 @@ export default {
 .news-type .el-select {
     width: 100%;
 }
+
 .ql-snow .ql-picker-label::before {
     display: inline-block;
     line-height: 22px;
-    position: absolute; 
+    position: absolute;
 }
 </style>

@@ -1,32 +1,34 @@
 <template>
     <section v-loading="listLoading">
         <div class="cont-btns mb15">
-            <a class="bk-button bk-default bk-button-small fl" @click="$router.push('/banner')" title="返回">
+            <a class="bk-button bk-default bk-button-small fl" title="返回" @click="$router.push('/banner')">
                 <span>返回</span>
             </a>
         </div>
         <div class="info">
             <div class="bk-panel-body p25 cont">
-                <div class="b-manage-title mb5">
-                    <h5 class="fl">添加Banner</h5>
+                <div class="b-manage-title">
+                    <h5 class="fl">Banner信息</h5>
                     <div class="edit-btns b-manage-btns fr">
-                        <!-- 交互说明
+                        <!-- 交互说明 
                              点击修改后，把保存于取消按钮显示出来，同时把info里所有input 的 readonly 去除
                         -->
-                        <a class="bk-button bk-success bk-button-small ml10 fr" @click="severInfo" title="保存"><span>保 存</span></a>
+                        <a v-show="formEditBtn" class="bk-button bk-primary bk-button-small ml10 fr" @click="editIonf('edit')" title="修改"><span>修改</span></a>
+                        <a v-show="!formEdit" class="bk-button bk-success bk-button-small ml10 fr" @click="severInfo" title="保存"><span>保存</span></a>
+                        <a v-show="!formEdit" class="bk-button bk-default bk-button-small ml10 fr" @click="editIonf('cancel')" title="取消"><span>取消</span></a>
                     </div>
                 </div>
                 <form class="bk-form" id="validate_form" method="POST" action="javascript:;">
                     <div class="bk-form-item">
                         <label class="bk-label"><span class="red">*</span>Banner标题：</label>
                         <div class="bk-form-content">
-                            <input type="text" class="bk-form-input" v-model="form.title" placeholder="请输入banner标题">
+                            <input type="text" class="bk-form-input" v-model="form.title" placeholder="请输入banner标题" :readonly="formEdit">
                         </div>
                     </div>
                     <div class="bk-form-item">
                         <label class="bk-label"><span class="red">*</span>跳转链接：</label>
                         <div class="bk-form-content">
-                            <input type="text" class="bk-form-input" v-model="form.jumpUrl" placeholder="请输入跳转链接">
+                            <input type="text" class="bk-form-input" v-model="form.jumpUrl" placeholder="请输入跳转链接" :readonly="formEdit">
                         </div>
                     </div>
                 </form>
@@ -35,7 +37,7 @@
                 <div class="b-manage-title mb5">
                     <h5 class="fl">Banner图片</h5>
                     <div class="edit-btns b-manage-btns fr">
-                        <a class="bk-button bk-primary" @click="modifyUpload('企业营业执照','imageUrl')">{{form.imageUrl?'修改照片':'上传照片'}}</a>
+                        <a class="bk-button bk-primary" v-show="!formEdit" @click="modifyUpload('企业营业执照','imageUrl')">{{form.imageUrl?'修改照片':'上传照片'}}</a>
                     </div>
                 </div>
                 <div class="row img-wrap">
@@ -52,7 +54,7 @@
                 <el-form-item>
                     <el-upload ref="upload" list-type="picture-card" :action="uploadPolicy.host" :multiple="uploadConfig.multiple" :data="uploadConfig.data" :on-success="uploadSuccess" :on-change="uploadChange" :on-error="uploadError" :on-remove="uploadRemove" :on-preview="uploadPictureCardPreview" :accept="uploadConfig.accept" :file-list="fileList" :before-upload="beforeUpload">
                         <i class="el-icon-plus"></i>
-                        <div slot="tip" class="el-upload__tip">只能上传jpg/png/jpeg/webp/gif文件，且不超过10mb</div>
+                        <div slot="tip" class="el-upload__tip">只能上传jpg/png/jpeg/webp/gif文件，且不超过5mb</div>
                     </el-upload>
                 </el-form-item>
             </el-form>
@@ -66,29 +68,68 @@
     </section>
 </template>
 <script>
+import {
+    regionDataPlus,
+    CodeToText,
+    TextToCode
+} from '../../area'
 import moment from 'moment'
 import md5 from 'js-md5';
 import validate from '../../validate';
+
 export default {
     data() {
         return {
             defaultImgUrl: 'http://fafashe.oss-cn-shenzhen.aliyuncs.com/images/f6ea28dd98b1ddb41c627d0c64197177',
             collapsed: true,
-            collapsedText: '显示更多查询条件', 
+            collapsedText: '显示更多查询条件',
+            TextToCode: TextToCode,
+            CodeToText: CodeToText,
+            address: [' ', '', ' '],
+            registerAddress: [' ', ' ', ' '],
+            provinceAndCityDataPlus: regionDataPlus,
             formEdit: true,
             formEditBtn: true,
             form: {
-                bid: '', //id
-                title: '', //banner标题
-                jumpUrl: '', //跳转链接 
-                imageUrl: '', //图片路径 
+                account: '', //帐号
+                ename: '', //企业名称
+                shortEname: '', //企业简称
+                address: '', //办公地址
+                areaCode: '',
+                areaName: '',
+                registerAddress: '', //登记地址
+                registerAreaCode: '',
+                registerAreaName: '',
+                linkman: '', //联系人
+                telephone: '', //联系电话 
+                legalPersonIdCard: '', //法人身份证
+                legalPersonName: '', //法人姓名
+                licenseNumber: '', //统一社会信用代码
+                taxpayerNumber: '', //纳税人识别  
+                agreement2Pic: '', //企业协议2
+                agreementPic: '', //企业协议1
+                licensePic: '', //企业执照
+                sealPic: '', //企业印章图样
+                eid: 0
+            },
+            balanceEdit: true,
+            balanceEditBtn: true,
+            balanceUrl: '',
+            balanceInfo: {
+                uid: '', //uid  企业
+                userType: 1, //1企业
+                emailCount: 0, //电子信函
+                letterCount: 0, //纸质信函
+                smsCount: 0 //msg
             },
             uploadTitle: '',
             uploadType: '',
             uploadVisible: false,
             dialogVisible: false,
             dialogImageUrl: '',
-            uploadPolicy: {},
+            uploadPolicy: {
+                host: ''
+            },
             uploadConfig: {
                 multiple: true,
                 thread: 5,
@@ -96,10 +137,19 @@ export default {
                 accept: 'image/png,image/gif,image/jpeg,image/webp'
             },
             fileList: [],
+            table: {
+                dataList: [],
+                total: 0,
+                pageSize: 10,
+                pageNum: 1
+            },
             listLoading: false,
         }
     },
     methods: {
+        dateTime(val) {
+            return moment(val).format('YYYY-MM-DD HH:mm:ss');
+        },
         editIonf(type) {
             if (type === 'edit') {
                 this.formEdit = false;
@@ -107,11 +157,46 @@ export default {
             } else {
                 this.formEdit = true;
                 this.formEditBtn = true;
+                this.getDataList();
             }
         },
+        balanceEditIonf(type) {
+            if (type === 'edit') {
+                this.balanceEdit = false;
+                this.balanceEditBtn = false;
+            } else {
+                this.balanceEdit = true;
+                this.balanceEditBtn = true;
+            }
+        }, 
         handleCurrentChange(val) {
             this.table.pageNum = val;
+            this.getDataList();
+        },
+        getDataList() {
+            let params = {};
+            params = {
+                bid: this.$route.params.id
+            };
 
+            this.listLoading = true;
+            this.$http.ajaxPost({
+                url: 'banner/getInfo',
+                params: params
+            }, (res) => {
+                this.$http.aop(res, () => {
+                    let data = res.body.data.bannerInfo;
+                    delete(data.password);
+                    this.form = data;
+                    if (res.body.data.bannerInfo) {
+                        this.balanceUrl = 'banner/modify';
+                    } else {
+                        this.balanceUrl = 'banner/create';
+                    }
+                     
+                    this.listLoading = false;
+                });
+            });
         },
         checkForm(data) { //验证担保人信息
             let isOk = true;
@@ -150,11 +235,11 @@ export default {
                         url: 'banner/create',
                         params: params
                     }, (res) => {
-                        this.$http.aop(res, () => { 
+                        this.$http.aop(res, () => {
                             this.$message({
                                 message: '入驻成功',
                                 type: 'success'
-                            }); 
+                            });
                             this.$router.push('/banner');
                         });
                         this.listLoading = false;
@@ -167,7 +252,6 @@ export default {
                 });
             }
         },
-        handleChange(value) {},
         modifyUpload(title, type) { // 初始化上传控件 
             if (type !== this.uploadType) {
                 this.fileList = [];
@@ -197,10 +281,10 @@ export default {
         beforeUpload(file) {
             let key = this.uploadPolicy.dir + '/' + md5('' + Date.now + this.uploadPolicy.uid + Math.random());
             this.uploadConfig.data.key = key;
-            const isLt5M = file.size / 1024 / 1024 < 10;
+            const isLt5M = file.size / 1024 / 1024 < 5;
             if (!isLt5M) {
                 this.fileList = [];
-                this.$message.error('上传图片大小不能超过 10MB!');
+                this.$message.error('上传图片大小不能超过 5MB!');
             }
             return isLt5M;
         },
@@ -219,22 +303,41 @@ export default {
             this.dialogImageUrl = file.url;
             this.dialogVisible = true;
         },
+        previewBox(title, url) {
+            this.dialogImageUrl = url;
+            this.dialogVisible = true;
+        },
         uploadError(file, fileList) {
             this.$message({
                 type: 'info',
                 message: '文件上传失败'
             });
-        }, 
-        previewBox(title, url) {
-            this.dialogImageUrl = url;
-            this.dialogVisible = true;
-        }
+        },
+        convertTextToCode(provinceText, cityText, regionText) {
+            let code = ''
+            if (provinceText && this.TextToCode[provinceText]) {
+                const province = this.TextToCode[provinceText]
+                code += province.code + ', '
+                if (cityText && province[cityText]) {
+                    const city = province[cityText]
+                    code += city.code + ', '
+                    if (regionText && city[regionText]) {
+                        code += city[regionText].code
+                    }
+                }
+            }
+            return code
+        },
+        onSubmit() {
+            this.getDataList();
 
+        },
+        handleChange(value) {}
     },
     mounted() {
-        this.$parent.parentUrlName = "首页管理";
+        this.$parent.parentUrlName = "首页Banner管理";
         this.$parent.parentUrls = '/banner';
-
+        //this.getDataList();
     }
 }
 </script>

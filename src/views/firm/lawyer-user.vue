@@ -3,39 +3,17 @@
         <div class="bk-panel mb20">
             <div class="bk-panel-body p25">
                 <form class="bk-form" :model="form" @submit="onSubmit">
-                    <div class="row">
-                        <!-- 交互说明: 选中条件后给A标签添加类 on -->
-                        <div id="time" class="col-md-12 col-lg-12 col-xs-12 mb15">
-                            <label class="bk-label pr15" style="width:100px;">入驻时间：</label>
-                            <el-radio-group v-model="topTime" class="rows">
-                                <el-radio-button label="最近一年"></el-radio-button>
-                                <el-radio-button label="最近半年"></el-radio-button>
-                                <el-radio-button label="最近一个月"></el-radio-button>
-                            </el-radio-group>
-                        </div>
-                    </div>
-                    <div class="row more-query-cont mb15">
+                    <div class="row more-query-cont">
                         <div class="col-md-4 col-lg-4 col-xs-4">
-                            <div class="bk-form-item mb20">
-                                <label class="bk-label pr15" style="width:100px;">企业名称：</label>
+                            <div class="bk-form-item">
+                                <label class="bk-label pr15" style="width:100px;">律师名称：</label>
                                 <div class="bk-form-content" style="margin-left:100px;">
-                                    <input type="text" v-model="form.ename" class="bk-form-input" placeholder="请输入企业名称" style="width:100%;">
+                                    <input type="text" v-model="form.lname" class="bk-form-input" placeholder="请输入律师名称" style="width:100%;">
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-4 col-lg-4 col-xs-4">
-                            <div class="bk-form-item mb20">
-                                <label class="bk-label pr15" style="width:100px;">联系电话：</label>
-                                <div class="bk-form-content" style="margin-left:100px;">
-                                    <input type="text" v-model="form.telephone" class="bk-form-input" placeholder="请输入手机号码" style="width:100%;">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-12 col-lg-12 col-xs-12">
-                            <div class="bk-form-content" style="margin-left:100px;">
-                                <button class="bk-button bk-success">查询</button>
-                                <!-- 交互说明 ：收起时更改文案为 展开更多查询条件，同时隐藏 more-query-cont -->
-                            </div>
+                            <button class="bk-button bk-success">查询</button>
                         </div>
                     </div>
                 </form>
@@ -52,7 +30,7 @@
                     <div class="bk-form bk-inline-form bk-form-small">
                         <div class="bk-form-item is-required">
                             <div class="bk-form-content">
-                                <button class="bk-button bk-primary bk-button-small" @click="$router.push('/enterprise/enterForm')" title="入驻新企业">添加</button>
+                                <button class="bk-button bk-primary bk-button-small" @click="$router.push('/lawyer/add')" title="添加律师">添加</button>
                             </div>
                         </div>
                     </div>
@@ -63,36 +41,32 @@
                     <table class="bk-table has-thead-bordered">
                         <thead>
                             <tr>
-                                <th>企业号</th>
-                                <th>联系电话</th>
-                                <th>入驻时间</th>
+                                <th>姓名</th>
+                                <th>头像</th>
+                                <th>标签</th>
+                                <th>时间</th>
                                 <th style="width:325px">操作</th>
                             </tr>
                         </thead>
                         <tbody v-if="table.dataList.length>0">
                             <tr v-for="(item,index) in table.dataList">
-                                <td>{{item.ename}}</td>
-                                <td>{{item.telephone}}</td>
+                                <td>{{item.name}}</td>
+                                <td><img :src="item.avatar+'?x-oss-process=image/resize,w_100,h_80/auto-orient,1/quality,q_90'" :alt="item.name" width="30"></td>
+                                <td>{{item.title}}</td>
                                 <td>{{dateTime(item.createTime)}}</td>
                                 <td>
-                                    <router-link :to="{path:'/enterprise/enterInfo/'+item.eid}" class="bk-text-button" title="基本信息">
-                                        基本信息
+                                    <router-link :to="{path:'/lawMannger/enterInfo/'+item.eid}" class="bk-text-button" title="基本信息">
+                                        律师信息
                                     </router-link>
-                                    <router-link :to="{path:'/enterprise/enterMsg/'+item.eid}" class="bk-text-button" title="短信订单"> 
-                                        短信订单
-                                    </router-link>
-                                    <router-link :to="{path:'/enterprise/enterEmail/'+item.eid}" class="bk-text-button" title="电子信函">
-                                        电子信函
-                                    </router-link>
-                                    <router-link :to="{path:'/enterprise/enterLetter/'+item.eid}" class="bk-text-button" title="信函下载">
-                                        信函下载
-                                    </router-link>
+                                    <a class="bk-text-button" @click="handleDel(item)" title="删除">
+                                        删除
+                                    </a>
                                 </td>
                             </tr>
                         </tbody>
                         <tbody v-else>
                             <tr>
-                                <td colspan="4" align="center">没数据</td>
+                                <td colspan="5" align="center">没数据</td>
                             </tr>
                         </tbody>
                     </table>
@@ -118,15 +92,9 @@ import moment from 'moment'
 export default {
     data() {
         return {
-            urlPath:{
-                pathsec:'',
-                pathsec:''
-            },
             topTime: '最近一年',
             form: {
-                ename: '', //身份证
-                telephone: '', //手机号  
-
+                lname: '', //律师名称 
             },
             table: {
                 dataList: [],
@@ -157,32 +125,58 @@ export default {
             this.table.pageNum = val;
             this.getDataList();
         },
+        handleDel: function(row) {
+            this.$confirm('确认删除该律师吗?', '提示', {
+                type: 'warning'
+            }).then(() => {
+                let para = {
+                    lid: row.lid
+                };
+                this.$http.ajaxPost({
+                    url: 'lawyer/delete',
+                    params: para
+                }, (res) => {
+                    this.$http.aop(res, () => {
+                        this.$message({
+                            message: '删除成功',
+                            type: 'success'
+                        });
+                        this.getDataList();
+                    });
+                });
+
+            }).catch(() => {
+                this.$message({
+                    type: 'info',
+                    message: '已取消'
+                });
+            });
+        },
         getDataList() {
             let params = {};
             params = {
                 pageSize: this.table.pageSize,
                 pageNum: this.table.pageNum,
-                ename: this.form.ename, //企业名称
-                telephone: this.form.telephone //手机号
+                name: this.form.lname, //律师名称 
             }
             this.listLoading = true;
             this.$http.ajaxPost({
-                url: 'enterprise/query',
+                url: 'lawyer/query',
                 params: params
             }, (res) => {
                 this.$http.aop(res, () => {
                     this.table.total = res.body.data.total;
-                    this.table.dataList = res.body.data.enterpriseInfoList||[];
+                    this.table.dataList = res.body.data.lawyerInfoList || [];
                     this.listLoading = false;
                 });
             });
         },
         onSubmit() {
-            this.getDataList(); 
+            this.getDataList();
         }
     },
     mounted() {
-        //this.getDataList();
+        this.getDataList();
     }
 }
 </script>
