@@ -61,7 +61,6 @@
                                     <a class="bk-text-button" @click="handleDel(item)" title="删除">
                                         删除
                                     </a>
-                                     
                                 </td>
                             </tr>
                         </tbody>
@@ -126,10 +125,10 @@ export default {
                 type: 'warning'
             }).then(() => {
                 let para = {
-                    bid: row.bid
+                    newsId: row.newsId
                 };
                 this.$http.ajaxPost({
-                    url: 'banner/delete',
+                    url: 'news/delete',
                     params: para
                 }, (res) => {
                     this.$http.aop(res, () => {

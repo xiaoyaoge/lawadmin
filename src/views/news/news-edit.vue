@@ -48,7 +48,7 @@
                         <label class="bk-label"><span class="red">*</span>新闻内容：</label>
                         <div class="bk-form-content">
                             <quill-editor v-if="!formEdit" ref="myTextEditor" v-model="news.content" :config="editorOption" @blur="onEditorBlur($event)" @focus="onEditorFocus($event)" @ready="onEditorReady($event)"></quill-editor>
-                            <div v-else> {{news.content}} &nbsp;</div>
+                            <div v-else v-html="news.content||'&nbsp;'">&nbsp;</div>
                         </div>
                     </div>
                 </form>
@@ -74,6 +74,7 @@ export default {
             formEdit: true,
             formEditBtn: true,
             news: {
+                newsId:'',
                 title: '',
                 brief: '',
                 content: '',
@@ -199,7 +200,7 @@ export default {
                 params: params
             }, (res) => {
                 this.$http.aop(res, () => {
-                    let data = res.body.data.content;
+                    let data = res.body.data;
                     this.news = data || { newsId: '', title: '', brief: '', content: '', category: '' };
 
                     this.listLoading = false;
@@ -338,21 +339,6 @@ export default {
                 type: 'info',
                 message: '文件上传失败'
             });
-        },
-        convertTextToCode(provinceText, cityText, regionText) {
-            let code = ''
-            if (provinceText && this.TextToCode[provinceText]) {
-                const province = this.TextToCode[provinceText]
-                code += province.code + ', '
-                if (cityText && province[cityText]) {
-                    const city = province[cityText]
-                    code += city.code + ', '
-                    if (regionText && city[regionText]) {
-                        code += city[regionText].code
-                    }
-                }
-            }
-            return code
         },
         onSubmit() {
             this.getDataList();

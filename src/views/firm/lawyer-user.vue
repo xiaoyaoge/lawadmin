@@ -55,7 +55,7 @@
                                 <td>{{item.title}}</td>
                                 <td>{{dateTime(item.createTime)}}</td>
                                 <td>
-                                    <router-link :to="{path:'/lawMannger/enterInfo/'+item.eid}" class="bk-text-button" title="基本信息">
+                                    <router-link :to="{path:'/lawyer/edit/'+item.lid}" class="bk-text-button" title="律师信息">
                                         律师信息
                                     </router-link>
                                     <a class="bk-text-button" @click="handleDel(item)" title="删除">

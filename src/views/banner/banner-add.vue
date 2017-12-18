@@ -24,7 +24,7 @@
                         </div>
                     </div>
                     <div class="bk-form-item">
-                        <label class="bk-label"><span class="red">*</span>跳转链接：</label>
+                        <label class="bk-label"><span class="red"></span>跳转链接：</label>
                         <div class="bk-form-content">
                             <input type="text" class="bk-form-input" v-model="form.jumpUrl" placeholder="请输入跳转链接">
                         </div>
@@ -40,7 +40,7 @@
                 </div>
                 <div class="row img-wrap">
                     <div>
-                        <div class="img-box" style="height:468px;">
+                        <div v-if="form.imageUrl" class="img-box" style="height:468px;">
                             <img :src="form.imageUrl||defaultImgUrl">
                         </div>
                     </div>
@@ -72,16 +72,16 @@ import validate from '../../validate';
 export default {
     data() {
         return {
-            defaultImgUrl: 'http://fafashe.oss-cn-shenzhen.aliyuncs.com/images/f6ea28dd98b1ddb41c627d0c64197177',
+            defaultImgUrl: '',
             collapsed: true,
-            collapsedText: '显示更多查询条件', 
+            collapsedText: '显示更多查询条件',
             formEdit: true,
             formEditBtn: true,
             form: {
                 bid: '', //id
                 title: '', //banner标题
-                jumpUrl: '', //跳转链接 
-                imageUrl: '', //图片路径 
+                jumpUrl: '', //跳转链接
+                imageUrl: '', //图片路径
             },
             uploadTitle: '',
             uploadType: '',
@@ -150,11 +150,11 @@ export default {
                         url: 'banner/create',
                         params: params
                     }, (res) => {
-                        this.$http.aop(res, () => { 
+                        this.$http.aop(res, () => {
                             this.$message({
                                 message: '入驻成功',
                                 type: 'success'
-                            }); 
+                            });
                             this.$router.push('/banner');
                         });
                         this.listLoading = false;

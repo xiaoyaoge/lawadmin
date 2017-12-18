@@ -1,7 +1,7 @@
 <template>
     <section v-loading="listLoading">
         <div class="cont-btns mb15">
-            <a class="bk-button bk-default bk-button-small fl" title="返回" @click="$router.push('/news')">
+            <a class="bk-button bk-default bk-button-small fl" title="返回" @click="$router.push('/lawyer')">
                 <span>返回</span>
             </a>
         </div>
@@ -18,37 +18,38 @@
                         <a v-show="!formEdit" class="bk-button bk-default bk-button-small ml10 fr" @click="editIonf('cancel')" title="取消"><span>取消</span></a>
                     </div>
                 </div>
-                <form class="bk-form" id="validate_form" method="POST" action="javascript:;">
+                 <form class="bk-form" id="validate_form" method="POST" action="javascript:;">
                     <div class="bk-form-item">
-                        <label class="bk-label"><span class="red">*</span>新闻标题：</label>
+                        <label class="bk-label"><span class="red">*</span>律师名称：</label>
                         <div class="bk-form-content">
-                            <el-input v-if="!formEdit" type="text" v-model="news.title" placeholder="请输入新闻简介"></el-input>
-                            <div v-else>{{news.title}} &nbsp;</div>
+                            <el-input type="text" v-model="lawyer.name" placeholder="请输入律师名称"></el-input>
                         </div>
                     </div>
                     <div class="bk-form-item mt5">
-                        <label class="bk-label"><span class="red">*</span>新闻类型：</label>
+                        <label class="bk-label"><span class="red">*</span>律师标签：</label>
                         <div class="bk-form-content">
-                            <el-select v-if="!formEdit" v-model="news.category" placeholder="请选择">
-                                <el-option label="请选择" value=""></el-option>
-                                <el-option label="仁良业绩" value="1"></el-option>
-                                <el-option label="业内资讯" value="2"></el-option>
-                            </el-select>
-                            <div v-else>{{news.category=="1"?'仁良业绩':'业内资讯'}}</div>
+                            <el-input type="textarea" v-model="lawyer.title" placeholder="请输入律师标签（如：清华大学研究生、刑法专家）"></el-input>
                         </div>
                     </div>
                     <div class="bk-form-item mt5">
-                        <label class="bk-label"><span class="red">*</span>新闻简介：</label>
+                        <label class="bk-label"><span class="red">*</span>律师头像：</label>
                         <div class="bk-form-content">
-                            <el-input v-if="!formEdit" type="textarea" v-model="news.brief" placeholder="请输入新闻简介"></el-input>
-                            <div v-else>{{news.brief}} &nbsp;</div>
+                            <div class="img-box" style="height:80px; width:100px; margin-bottom:0;">
+                                <img :src="(lawyer.avatar||defaultImgUrl)+'?x-oss-process=image/resize,w_100,h_80'">
+                            </div>
+                            <a class="bk-button bk-primary" @click="modifyUpload('用户头像','avatar')">{{lawyer.avatar?'修改照片':'上传照片'}}</a>
                         </div>
                     </div>
                     <div class="bk-form-item mt5">
-                        <label class="bk-label"><span class="red">*</span>新闻内容：</label>
+                        <label class="bk-label"><span class="red">*</span>律师简介：</label>
                         <div class="bk-form-content">
-                            <quill-editor v-if="!formEdit" ref="myTextEditor" v-model="news.content" :config="editorOption" @blur="onEditorBlur($event)" @focus="onEditorFocus($event)" @ready="onEditorReady($event)"></quill-editor>
-                            <div v-else> {{news.content}} &nbsp;</div>
+                            <quill-editor ref="myTextEditor" v-model="lawyer.introduction" :config="editorOption" @blur="onEditorBlur($event)" @focus="onEditorFocus($event)" @ready="onEditorReady($event)"></quill-editor>
+                        </div>
+                    </div>
+                    <div class="bk-form-item mt5">
+                        <label class="bk-label">&nbsp;</label>
+                        <div class="bk-form-content">
+                            <el-button type="primary" @click.native="doSave">提交</el-button>
                         </div>
                     </div>
                 </form>
@@ -68,16 +69,16 @@ export default {
     },
     data() {
         return {
+            defaultImgUrl: 'http://fafashe.oss-cn-shenzhen.aliyuncs.com/images/f6ea28dd98b1ddb41c627d0c64197177',
             collapsed: true,
             collapsedText: '显示更多查询条件',
-
             formEdit: true,
             formEditBtn: true,
-            news: {
+            lawyer: {
+                avatar: '',
                 title: '',
-                brief: '',
-                content: '',
-                category: ''
+                introduction: "",
+                name: ''
             },
             uploadTitle: '',
             uploadType: '',
@@ -124,7 +125,7 @@ export default {
         },
         onEditorChange({ editor, html, text }) {
             console.log('editor change!', editor, html, text)
-            this.news.content = html
+            this.lawyer.content = html
         },
 
         dateTime(val) {
@@ -190,17 +191,17 @@ export default {
         getDataList() {
             let params = {};
             params = {
-                newsId: this.$route.params.id
+                lid: this.$route.params.id
             };
 
             this.listLoading = true;
             this.$http.ajaxPost({
-                url: 'news/getInfo',
+                url: 'lawyer/getInfo',
                 params: params
             }, (res) => {
                 this.$http.aop(res, () => {
-                    let data = res.body.data.content;
-                    this.news = data || { newsId: '', title: '', brief: '', content: '', category: '' };
+                    let data = res.body.data;
+                    this.lawyer = data || { avatar: '', title: '', introduction: "", name: '' };
 
                     this.listLoading = false;
                 });
@@ -245,15 +246,15 @@ export default {
         },
         severInfo() {
             let params = {
-                news: this.news,
+                lawyer: this.lawyer,
             };
-            params.news.newsId = this.$route.params.id;
-            if (this.checkForm(params.news)) {
+            params.lawyer.lid = this.$route.params.id;
+            if (this.checkForm(params.lawyer)) {
                 this.$confirm('确认修改吗？', '提示', {}).then(() => {
                     this.listLoading = true;
                     this.$http.ajaxPost({
-                        url: 'news/modify',
-                        params: params.news
+                        url: 'lawyer/modify',
+                        params: params.lawyer
                     }, (res) => {
                         this.$http.aop(res, () => {
                             if (res.body.ret == '0') {
@@ -339,21 +340,6 @@ export default {
                 message: '文件上传失败'
             });
         },
-        convertTextToCode(provinceText, cityText, regionText) {
-            let code = ''
-            if (provinceText && this.TextToCode[provinceText]) {
-                const province = this.TextToCode[provinceText]
-                code += province.code + ', '
-                if (cityText && province[cityText]) {
-                    const city = province[cityText]
-                    code += city.code + ', '
-                    if (regionText && city[regionText]) {
-                        code += city[regionText].code
-                    }
-                }
-            }
-            return code
-        },
         onSubmit() {
             this.getDataList();
 
@@ -362,7 +348,7 @@ export default {
     },
     mounted() {
         this.$parent.parentUrlName = "新闻管理";
-        this.$parent.parentUrls = '/news';
+        this.$parent.parentUrls = '/lawyer';
         this.getDataList();
     }
 }

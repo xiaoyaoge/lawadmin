@@ -19,7 +19,7 @@
                     <div class="bk-form-item">
                         <label class="bk-label"><span class="red">*</span>新闻标题：</label>
                         <div class="bk-form-content">
-                            <el-input type="text" v-model="news.title" placeholder="请输入新闻简介"></el-input> 
+                            <el-input type="text" v-model="news.title" placeholder="请输入新闻简介"></el-input>
                         </div>
                     </div>
                     <div class="bk-form-item mt5">
@@ -30,7 +30,6 @@
                                 <el-option label="仁良业绩" value="1"></el-option>
                                 <el-option label="业内资讯" value="2"></el-option>
                             </el-select>
-                            
                         </div>
                     </div>
                     <div class="bk-form-item mt5">
@@ -43,7 +42,6 @@
                         <label class="bk-label"><span class="red">*</span>新闻内容：</label>
                         <div class="bk-form-content">
                             <quill-editor ref="myTextEditor" v-model="news.content" :config="editorOption" @blur="onEditorBlur($event)" @focus="onEditorFocus($event)" @ready="onEditorReady($event)"></quill-editor>
-                            
                         </div>
                     </div>
                     <div class="bk-form-item mt5">
@@ -52,7 +50,7 @@
                             <el-button type="primary" @click.native="doSave">提交</el-button>
                         </div>
                     </div>
-                </form> 
+                </form>
             </div>
         </div>
     </div>
@@ -65,7 +63,7 @@ export default {
         'quillEditor': quillEditor
     },
     data() {
-        return { 
+        return {
             news: {
                 title: '',
                 brief: '',
@@ -86,7 +84,8 @@ export default {
                         ['clean']
                     ]
                 }
-            }
+            },
+            listLoading: false
         }
     },
     methods: {
@@ -142,7 +141,6 @@ export default {
         },
         doSave() {
             let that = this
-            let url = '/news/add'
             var reqData = {
                 title: this.news.title,
                 brief: this.news.brief,
@@ -156,7 +154,7 @@ export default {
                     this.listLoading = true;
                     this.$http.ajaxPost({
                         url: 'news/create',
-                        params: params
+                        params: reqData
                     }, (res) => {
                         this.$http.aop(res, () => {
                             this.$message({

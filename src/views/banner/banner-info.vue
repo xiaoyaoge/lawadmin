@@ -10,7 +10,7 @@
                 <div class="b-manage-title">
                     <h5 class="fl">Banner信息</h5>
                     <div class="edit-btns b-manage-btns fr">
-                        <!-- 交互说明 
+                        <!-- 交互说明
                              点击修改后，把保存于取消按钮显示出来，同时把info里所有input 的 readonly 去除
                         -->
                         <a v-show="formEditBtn" class="bk-button bk-primary bk-button-small ml10 fr" @click="editIonf('edit')" title="修改"><span>修改</span></a>
@@ -26,7 +26,7 @@
                         </div>
                     </div>
                     <div class="bk-form-item">
-                        <label class="bk-label"><span class="red">*</span>跳转链接：</label>
+                        <label class="bk-label"><span class="red"></span>跳转链接：</label>
                         <div class="bk-form-content">
                             <input type="text" class="bk-form-input" v-model="form.jumpUrl" placeholder="请输入跳转链接" :readonly="formEdit">
                         </div>
@@ -80,42 +80,20 @@ import validate from '../../validate';
 export default {
     data() {
         return {
-            defaultImgUrl: 'http://fafashe.oss-cn-shenzhen.aliyuncs.com/images/f6ea28dd98b1ddb41c627d0c64197177',
+            defaultImgUrl: '',
             collapsed: true,
-            collapsedText: '显示更多查询条件',
-            TextToCode: TextToCode,
-            CodeToText: CodeToText,
-            address: [' ', '', ' '],
-            registerAddress: [' ', ' ', ' '],
-            provinceAndCityDataPlus: regionDataPlus,
             formEdit: true,
             formEditBtn: true,
             form: {
-                account: '', //帐号
-                ename: '', //企业名称
-                shortEname: '', //企业简称
-                address: '', //办公地址
-                areaCode: '',
-                areaName: '',
-                registerAddress: '', //登记地址
-                registerAreaCode: '',
-                registerAreaName: '',
-                linkman: '', //联系人
-                telephone: '', //联系电话 
-                legalPersonIdCard: '', //法人身份证
-                legalPersonName: '', //法人姓名
-                licenseNumber: '', //统一社会信用代码
-                taxpayerNumber: '', //纳税人识别  
-                agreement2Pic: '', //企业协议2
-                agreementPic: '', //企业协议1
-                licensePic: '', //企业执照
-                sealPic: '', //企业印章图样
-                eid: 0
+                bid: '', //id
+                title: '', //banner标题
+                jumpUrl: '', //跳转链接
+                imageUrl: '', //图片路径
             },
             balanceEdit: true,
             balanceEditBtn: true,
             balanceUrl: '',
-            balanceInfo: {
+            form: {
                 uid: '', //uid  企业
                 userType: 1, //1企业
                 emailCount: 0, //电子信函
@@ -137,12 +115,6 @@ export default {
                 accept: 'image/png,image/gif,image/jpeg,image/webp'
             },
             fileList: [],
-            table: {
-                dataList: [],
-                total: 0,
-                pageSize: 10,
-                pageNum: 1
-            },
             listLoading: false,
         }
     },
@@ -186,14 +158,7 @@ export default {
             }, (res) => {
                 this.$http.aop(res, () => {
                     let data = res.body.data.bannerInfo;
-                    delete(data.password);
-                    this.form = data;
-                    if (res.body.data.bannerInfo) {
-                        this.balanceUrl = 'banner/modify';
-                    } else {
-                        this.balanceUrl = 'banner/create';
-                    }
-                     
+                    this.form = data
                     this.listLoading = false;
                 });
             });
@@ -229,15 +194,15 @@ export default {
             };
             console.log(params.bannerInfo)
             if (this.checkForm(params.bannerInfo)) {
-                this.$confirm('确认提创建吗？', '提示', {}).then(() => {
+                this.$confirm('确认修改吗？', '提示', {}).then(() => {
                     this.listLoading = true;
                     this.$http.ajaxPost({
-                        url: 'banner/create',
+                        url: 'banner/modify',
                         params: params
                     }, (res) => {
                         this.$http.aop(res, () => {
                             this.$message({
-                                message: '入驻成功',
+                                message: '修改成功',
                                 type: 'success'
                             });
                             this.$router.push('/banner');
@@ -313,21 +278,6 @@ export default {
                 message: '文件上传失败'
             });
         },
-        convertTextToCode(provinceText, cityText, regionText) {
-            let code = ''
-            if (provinceText && this.TextToCode[provinceText]) {
-                const province = this.TextToCode[provinceText]
-                code += province.code + ', '
-                if (cityText && province[cityText]) {
-                    const city = province[cityText]
-                    code += city.code + ', '
-                    if (regionText && city[regionText]) {
-                        code += city[regionText].code
-                    }
-                }
-            }
-            return code
-        },
         onSubmit() {
             this.getDataList();
 
@@ -337,7 +287,7 @@ export default {
     mounted() {
         this.$parent.parentUrlName = "首页Banner管理";
         this.$parent.parentUrls = '/banner';
-        //this.getDataList();
+        this.getDataList();
     }
 }
 </script>
