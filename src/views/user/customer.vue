@@ -33,15 +33,13 @@
                 <table class="bk-table">
                     <thead>
                         <tr>
-                            <th>姓名</th>
-                            <th>电话</th>
+                            <th>账号</th> 
                             <th style="width:20%;">日期</th>
                             <th style="width:270px;">操作</th>
                         </tr>
                     </thead>
                     <tbody v-if="dataList.length>0">
                         <tr v-for="(item,index) in dataList">
-                            <td>{{item.name}}</td>
                             <td>{{item.mobile}}</td>
                             <td>{{dateTime(item.modifyTime)}}</td>
                             <td>
@@ -206,7 +204,7 @@ export default {
                 }]
             },
             orderType: '超级管理员',
-            addForm: { //新增界面数据 
+            addForm: { //新增界面数据
                 name: '',
                 mobile: '',
                 password: '',
@@ -249,7 +247,7 @@ export default {
             }, (res) => {
                 this.$http.aop(res, () => {
                     this.total = res.body.data.total;
-                    this.dataList = res.body.data.managerInfos || [];
+                    this.dataList = res.body.data.userInfoList || [];
                     this.listLoading = false;
                 });
             });
