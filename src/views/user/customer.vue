@@ -39,7 +39,7 @@
                             <th style="width:270px;">操作</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody v-if="dataList.length>0">
                         <tr v-for="(item,index) in dataList">
                             <td>{{item.name}}</td>
                             <td>{{item.mobile}}</td>
@@ -54,6 +54,11 @@
                                     <i class="bk-text">删除</i>
                                 </a>
                             </td>
+                        </tr>
+                    </tbody>
+                    <tbody v-else>
+                        <tr>
+                            <td colspan="4" align="center">没数据</td>
                         </tr>
                     </tbody>
                 </table>
@@ -244,7 +249,7 @@ export default {
             }, (res) => {
                 this.$http.aop(res, () => {
                     this.total = res.body.data.total;
-                    this.dataList = res.body.data.managerInfos;
+                    this.dataList = res.body.data.managerInfos || [];
                     this.listLoading = false;
                 });
             });

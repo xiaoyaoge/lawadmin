@@ -42,7 +42,6 @@
                         <thead>
                             <tr>
                                 <th>姓名</th>
-                                <th>头像</th>
                                 <th>标签</th>
                                 <th>时间</th>
                                 <th style="width:325px">操作</th>
@@ -51,8 +50,6 @@
                         <tbody v-if="table.dataList.length>0">
                             <tr v-for="(item,index) in table.dataList">
                                 <td>{{item.name}}</td>
-                                <td><img :src="item.avatar+'?x-oss-process=image/resize,w_100,h_80/auto-orient,1/quality,q_90'" :alt="item.name" width="30"></td>
-                                <td>{{item.title}}</td>
                                 <td>{{dateTime(item.createTime)}}</td>
                                 <td>
                                     <router-link :to="{path:'/lawyer/edit/'+item.lid}" class="bk-text-button" title="律师信息">

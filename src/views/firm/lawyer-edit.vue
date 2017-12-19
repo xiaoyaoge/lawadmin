@@ -8,9 +8,9 @@
         <div class="info">
             <div class="bk-panel-body p25 cont">
                 <div class="b-manage-title">
-                    <h5 class="fl">新闻</h5>
+                    <h5 class="fl">律师详情</h5>
                     <div class="edit-btns b-manage-btns fr">
-                        <!-- 交互说明 
+                        <!-- 交互说明
                              点击修改后，把保存于取消按钮显示出来，同时把info里所有input 的 readonly 去除
                         -->
                         <a v-show="formEditBtn" class="bk-button bk-primary bk-button-small ml10 fr" @click="editIonf('edit')" title="修改"><span>修改</span></a>
@@ -18,38 +18,36 @@
                         <a v-show="!formEdit" class="bk-button bk-default bk-button-small ml10 fr" @click="editIonf('cancel')" title="取消"><span>取消</span></a>
                     </div>
                 </div>
-                 <form class="bk-form" id="validate_form" method="POST" action="javascript:;">
+                <form class="bk-form" id="validate_form" method="POST" action="javascript:;">
                     <div class="bk-form-item">
                         <label class="bk-label"><span class="red">*</span>律师名称：</label>
                         <div class="bk-form-content">
-                            <el-input type="text" v-model="lawyer.name" placeholder="请输入律师名称"></el-input>
+                            <el-input v-if="!formEdit" type="text" v-model="lawyer.name" placeholder="请输入律师名称"></el-input>
+                            <div v-else>{{lawyer.name}}</div>
                         </div>
                     </div>
                     <div class="bk-form-item mt5">
                         <label class="bk-label"><span class="red">*</span>律师标签：</label>
                         <div class="bk-form-content">
-                            <el-input type="textarea" v-model="lawyer.title" placeholder="请输入律师标签（如：清华大学研究生、刑法专家）"></el-input>
+                            <el-input v-if="!formEdit" type="textarea" v-model="lawyer.title" placeholder="请输入律师标签（如：清华大学研究生、刑法专家）"></el-input>
+                            <div v-else>{{lawyer.title}}</div>
                         </div>
                     </div>
                     <div class="bk-form-item mt5">
                         <label class="bk-label"><span class="red">*</span>律师头像：</label>
-                        <div class="bk-form-content">
+                        <div class="bk-form-content" v-if="!formEdit">
                             <div class="img-box" style="height:80px; width:100px; margin-bottom:0;">
                                 <img :src="(lawyer.avatar||defaultImgUrl)+'?x-oss-process=image/resize,w_100,h_80'">
                             </div>
                             <a class="bk-button bk-primary" @click="modifyUpload('用户头像','avatar')">{{lawyer.avatar?'修改照片':'上传照片'}}</a>
                         </div>
+                        <div class="bk-form-content" v-else><img :src="(lawyer.avatar||defaultImgUrl)+'?x-oss-process=image/resize,w_160'"></div>
                     </div>
                     <div class="bk-form-item mt5">
                         <label class="bk-label"><span class="red">*</span>律师简介：</label>
                         <div class="bk-form-content">
-                            <quill-editor ref="myTextEditor" v-model="lawyer.introduction" :config="editorOption" @blur="onEditorBlur($event)" @focus="onEditorFocus($event)" @ready="onEditorReady($event)"></quill-editor>
-                        </div>
-                    </div>
-                    <div class="bk-form-item mt5">
-                        <label class="bk-label">&nbsp;</label>
-                        <div class="bk-form-content">
-                            <el-button type="primary" @click.native="doSave">提交</el-button>
+                            <quill-editor v-if="!formEditBtn" ref="myTextEditor" v-model="lawyer.introduction" :config="editorOption" @blur="onEditorBlur($event)" @focus="onEditorFocus($event)" @ready="onEditorReady($event)"></quill-editor>
+                            <div v-else v-html="lawyer.introduction||'&nbsp;'">&nbsp;</div>
                         </div>
                     </div>
                 </form>
@@ -69,7 +67,7 @@ export default {
     },
     data() {
         return {
-            defaultImgUrl: 'http://fafashe.oss-cn-shenzhen.aliyuncs.com/images/f6ea28dd98b1ddb41c627d0c64197177',
+            defaultImgUrl: '',
             collapsed: true,
             collapsedText: '显示更多查询条件',
             formEdit: true,
@@ -202,7 +200,6 @@ export default {
                 this.$http.aop(res, () => {
                     let data = res.body.data;
                     this.lawyer = data || { avatar: '', title: '', introduction: "", name: '' };
-
                     this.listLoading = false;
                 });
             });

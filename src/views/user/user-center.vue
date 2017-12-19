@@ -20,11 +20,11 @@
                             <th style="width:270px;">操作</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr v-for="(item,index) in dataList"> 
+                    <tbody v-if="dataList.length>0">
+                        <tr v-for="(item,index) in dataList">
                             <td>{{item.name}}</td>
                             <td>{{item.mobile}}</td>
-                             <td>{{dateTime(item.modifyTime)}}</td>
+                            <td>{{dateTime(item.modifyTime)}}</td>
                             <td>
                                 <a class="bk-icon-button bk-warning bk-button-mini" title="修改" @click="handleEdit(index, item)">
                                     <i class="bk-icon icon-edit bk-icon"></i>
@@ -35,6 +35,11 @@
                                     <i class="bk-text">删除</i>
                                 </a>
                             </td>
+                        </tr>
+                    </tbody>
+                    <tbody v-else>
+                        <tr>
+                            <td colspan="4" align="center">没数据</td>
                         </tr>
                     </tbody>
                 </table>
@@ -188,7 +193,7 @@ export default {
 
         }
     },
-    methods: { 
+    methods: {
         dateTime(val) {
             return moment(val).format('YYYY-MM-DD HH:mm:ss');
         },
@@ -221,7 +226,7 @@ export default {
             }, (res) => {
                 this.$http.aop(res, () => {
                     this.total = res.body.data.total;
-                    this.dataList = res.body.data.managerInfos;
+                    this.dataList = res.body.data.managerInfos||[];
                     this.listLoading = false;
                 });
             });

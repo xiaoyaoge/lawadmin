@@ -34,7 +34,7 @@
                                 <el-option label="仁良业绩" value="1"></el-option>
                                 <el-option label="业内资讯" value="2"></el-option>
                             </el-select>
-                            <div v-else>{{news.category=="1"?'仁良业绩':'业内资讯'}}</div>
+                            <div v-else>{{news.category==='1'?'仁良业绩':'业内资讯'}}</div>
                         </div>
                     </div>
                     <div class="bk-form-item mt5">
@@ -74,7 +74,7 @@ export default {
             formEdit: true,
             formEditBtn: true,
             news: {
-                newsId:'',
+                newsId: '',
                 title: '',
                 brief: '',
                 content: '',
@@ -202,7 +202,7 @@ export default {
                 this.$http.aop(res, () => {
                     let data = res.body.data;
                     this.news = data || { newsId: '', title: '', brief: '', content: '', category: '' };
-
+                    this.news.category = this.news.category + '';
                     this.listLoading = false;
                 });
             });

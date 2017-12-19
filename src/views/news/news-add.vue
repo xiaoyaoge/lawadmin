@@ -41,7 +41,8 @@
                     <div class="bk-form-item mt5">
                         <label class="bk-label"><span class="red">*</span>新闻内容：</label>
                         <div class="bk-form-content">
-                            <quill-editor ref="myTextEditor" v-model="news.content" :config="editorOption" @blur="onEditorBlur($event)" @focus="onEditorFocus($event)" @ready="onEditorReady($event)"></quill-editor>
+                            <quill-editor ref="myTextEditor" v-model="news.content" :config="editorOption" @blur="onEditorBlur($event)" @focus="onEditorFocus($event)" @ready="onEditorReady($event)">
+                            </quill-editor>
                         </div>
                     </div>
                     <div class="bk-form-item mt5">
@@ -67,8 +68,8 @@ export default {
             news: {
                 title: '',
                 brief: '',
-                content: "",
-                category: null
+                content: '',
+                category: ''
             },
             editorOption: {
                 theme: 'snow',
@@ -148,7 +149,6 @@ export default {
                 category: this.news.category
             }
             console.log(reqData);
-            //return;
             if (this.checkForm(reqData)) {
                 this.$confirm('确认提创建吗？', '提示', {}).then(() => {
                     this.listLoading = true;
@@ -158,7 +158,7 @@ export default {
                     }, (res) => {
                         this.$http.aop(res, () => {
                             this.$message({
-                                message: '入驻成功',
+                                message: '添加成功',
                                 type: 'success'
                             });
                             this.$router.push('/news');

@@ -42,7 +42,6 @@
                         <thead>
                             <tr>
                                 <th>标题</th>
-                                <th>简介</th>
                                 <th>类别</th>
                                 <th>创建时间</th>
                                 <th style="width:325px">操作</th>
@@ -51,7 +50,6 @@
                         <tbody v-if="table.dataList.length>0">
                             <tr v-for="(item,index) in table.dataList">
                                 <td><div style="width:200px; height:40px; overflow: hidden; text-overflow:ellipsis; white-space: nowrap;">{{item.title}}</div></td>
-                                <td><div style="width:200px; height:40px; overflow: hidden; text-overflow:ellipsis; white-space: nowrap;">{{item.brief}}</div></td> 
                                 <td>{{item.category==1?'仁良业绩':'业内资讯'}}</td>
                                 <td>{{dateTime(item.createTime)}}</td>
                                 <td>
@@ -99,7 +97,7 @@ export default {
             topTime: '最近一年',
             form: {
                 title: '', //身份证
-                telephone: '', //手机号  
+                telephone: '', //手机号
 
             },
             table: {
