@@ -35,7 +35,7 @@ let routes = [{
         hidden: true
     },
     {
-        path: '/',
+        path: '/banner',
         component: Home,
         name: '首页banner管理',
         iconCls: 'icon-home',
@@ -50,7 +50,7 @@ let routes = [{
         ]
     },
     {
-        path: '/',
+        path: '/news',
         component: Home,
         name: '新闻管理',
         iconCls: 'icon-list',
@@ -66,7 +66,7 @@ let routes = [{
         ]
     },
     {
-        path: '/',
+        path: '/lawyer',
         component: Home,
         name: '仁良律师',
         iconCls: 'icon-user',
@@ -82,19 +82,19 @@ let routes = [{
         ]
     },
     {
-        path: '/',
+        path: '/manager',
         component: Home,
         name: '管理员',
         iconCls: 'icon-id',
         hidden: false,
         leaf: false, //只有一个节点
-        paths: '/manager',
+        paths: '/manager,/customer',
         role: 99,
         children: [
             { path: '/manager', component: UserCenter, name: '管理员' },
             { path: '/customer', component: Customer, name: '注册用户' }
         ]
-    }, 
+    },
     {
         path: '*',
         hidden: true,

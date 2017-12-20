@@ -44,7 +44,7 @@
                                             <span class="icon-box"><i class="bk-icon" :class="item.iconCls"></i></span>
                                             <span class="nav-name">{{item.name}}</span>
                                         </a>
-                                        <div class="flex-subnavs" :class="'submenu-hook-'+index" :style="item.paths.indexOf($route.path)>-1?'display: block;':'display:none;'">
+                                        <div class="flex-subnavs" :class="'submenu-hook-'+index">
                                             <a v-for="child in item.children" v-if="!child.hidden" :class="$route.path==child.path?'on':''" @click="$router.push(child.path);"><i></i>{{child.name}}
                                             </a>
                                         </div>

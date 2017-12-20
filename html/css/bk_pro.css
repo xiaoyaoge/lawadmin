@@ -3992,7 +3992,7 @@ th {
 
 .bk-sidebar .open>a {
     background: #1e1209;
-    border-left: 4px solid #b62a2a; 
+    border-left: 4px solid #b62a2a;
 }
 
 .slide-close .slide-switch .bk-icon {
@@ -4085,6 +4085,10 @@ th {
 }
 
 .slide-close li:hover .flex-subnavs {
+    display: block !important
+}
+
+.slide-close li.open .flex-subnavs {
     display: block !important
 }
 
