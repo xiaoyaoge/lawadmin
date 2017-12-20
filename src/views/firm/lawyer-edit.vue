@@ -67,7 +67,7 @@ export default {
     },
     data() {
         return {
-            canCrop:true,
+            canCrop: false,
             defaultImgUrl: '',
             collapsed: true,
             collapsedText: '显示更多查询条件',
@@ -351,3 +351,8 @@ export default {
     }
 }
 </script>
+<style>
+    .bk-form-content p img{
+        max-width: 100%;
+    }
+</style>

@@ -80,7 +80,7 @@ export default {
     },
     data() {
         return {
-            canCrop: true,
+            canCrop: false,
             listLoading: false,
             defaultImgUrl: 'http://fafashe.oss-cn-shenzhen.aliyuncs.com/images/f6ea28dd98b1ddb41c627d0c64197177',
             lawyer: {
