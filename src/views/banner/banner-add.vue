@@ -66,7 +66,6 @@
     </section>
 </template>
 <script>
-import moment from 'moment'
 import md5 from 'js-md5';
 import validate from '../../validate';
 export default {

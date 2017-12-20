@@ -33,7 +33,7 @@
                             </td>
                             <td>{{nameStr(items.smsProviderList)}}</td>
                             <td>{{dateTime(items.modifyTime)}}</td>
-                            <td>
+                            <td
                                 <a @click="preview(items,'msg','info')" class="bk-text-button">查看详情</a>
                                 <a @click="preview(items,'msg','edit')" class="bk-text-button">编辑</a>
                             </td>

@@ -32,7 +32,7 @@
                         <label class="bk-label"><span class="red">*</span>律师头像：</label>
                         <div class="bk-form-content">
                             <div class="img-box" style="height:80px; width:100px; margin-bottom:0;">
-                                <img :src="(lawyer.avatar||defaultImgUrl)+'?x-oss-process=image/resize,w_100,h_80'">
+                                <img :src="(lawyer.avatar||defaultImgUrl)+'?x-oss-process=image/resize,w_100,h_80/auto-orient,1/quality,q_90'">
                             </div>
                             <a class="bk-button bk-primary" @click="modifyUpload('用户头像','avatar')">{{lawyer.avatar?'修改照片':'上传照片'}}</a>
                         </div>
@@ -40,7 +40,7 @@
                     <div class="bk-form-item mt5">
                         <label class="bk-label"><span class="red">*</span>律师简介：</label>
                         <div class="bk-form-content">
-                            <quill-editor ref="myTextEditor" v-model="lawyer.introduction" :config="editorOption" @blur="onEditorBlur($event)" @focus="onEditorFocus($event)" @ready="onEditorReady($event)"></quill-editor>
+                            <editor ref="myTextEditor" :fileName="'myFile'" :canCrop="canCrop" v-model="lawyer.introduction"></editor>
                         </div>
                     </div>
                     <div class="bk-form-item mt5">
@@ -71,15 +71,16 @@
     </div>
 </template>
 <script>
-import { quillEditor } from 'vue-quill-editor'
+import editor from '../../commons/Quilleditor.vue'
 import md5 from 'js-md5'
 export default {
     name: 'Index',
     components: {
-        'quillEditor': quillEditor
+        editor
     },
     data() {
         return {
+            canCrop: true,
             listLoading: false,
             defaultImgUrl: 'http://fafashe.oss-cn-shenzhen.aliyuncs.com/images/f6ea28dd98b1ddb41c627d0c64197177',
             lawyer: {
@@ -113,7 +114,12 @@ export default {
                         [{ 'align': [] }],
                         ['link', 'image', 'video'],
                         ['clean']
-                    ]
+                    ],
+                    imageStyles: {
+                        class1: 'Class 1',
+                        class2: 'Class 2'
+                    },
+                    imageEditButtons: ['imageAlign', 'imageInfo', 'imageRemove']
                 }
             }
         }
@@ -323,5 +329,14 @@ export default {
     display: inline-block;
     line-height: 22px;
     position: absolute;
+}
+
+.class1 {
+    border-radius: 10%;
+    border: 2px solid #efefef;
+}
+
+.class2 {
+    opacity: 0.5;
 }
 </style>

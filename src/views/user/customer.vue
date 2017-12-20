@@ -33,13 +33,15 @@
                 <table class="bk-table">
                     <thead>
                         <tr>
-                            <th>账号</th> 
-                            <th style="width:20%;">日期</th>
-                            <th style="width:270px;">操作</th>
+                            <th>序号</th> 
+                            <th>账号(手机号码)</th> 
+                            <th style="width:20%;">注册时间</th>
+                            <th style="width:220px;">操作</th>
                         </tr>
                     </thead>
                     <tbody v-if="dataList.length>0">
-                        <tr v-for="(item,index) in dataList">
+                        <tr v-for="(item,index) in dataList" :key="index">
+                            <td>{{(index+1>10?index+1:('0'+(index+1)))}}</td>
                             <td>{{item.mobile}}</td>
                             <td>{{dateTime(item.modifyTime)}}</td>
                             <td>

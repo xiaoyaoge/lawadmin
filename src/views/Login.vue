@@ -21,8 +21,8 @@ export default {
         return {
             logining: false,
             ruleForm2: {
-                account: '', //17025310757
-                checkPass: '' //123456
+                account: '',  
+                checkPass: ''
             },
             rules2: {
                 account: [{
@@ -60,15 +60,9 @@ export default {
                     }, (res) => {
                         this.$http.aop(res, () => {
                             sessionStorage.setItem('user', JSON.stringify(res.body.data));
-                            if (res.body.data.role == 99) {
-                                this.$router.push({
-                                    path: '/banner'
-                                });
-                            } else {
-                                this.$router.push({
-                                    path: '/banner'
-                                });
-                            }
+                            this.$router.push({
+                                path: '/banner'
+                            });
 
                         });
 

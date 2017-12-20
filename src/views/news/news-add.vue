@@ -41,8 +41,8 @@
                     <div class="bk-form-item mt5">
                         <label class="bk-label"><span class="red">*</span>新闻内容：</label>
                         <div class="bk-form-content">
-                            <quill-editor ref="myTextEditor" v-model="news.content" :config="editorOption" @blur="onEditorBlur($event)" @focus="onEditorFocus($event)" @ready="onEditorReady($event)">
-                            </quill-editor>
+                            <editor ref="myTextEditor" :fileName="'myFile'" :canCrop="canCrop" :uploadUrl="uploadUrl" v-model="news.content"></editor>
+                            <!-- <div v-html="content"></div> -->
                         </div>
                     </div>
                     <div class="bk-form-item mt5">
@@ -57,52 +57,28 @@
     </div>
 </template>
 <script>
-import { quillEditor } from 'vue-quill-editor'
+import editor from '../../commons/Quilleditor.vue'
 export default {
-    name: 'Index',
+    name: 'NewsAdd',
     components: {
-        'quillEditor': quillEditor
+        'editor': editor,
+        //'quillEditor': quillEditor
     },
     data() {
         return {
+            canCrop: false,
+            content: '',
+            uploadUrl: 'http://localhost:4000/api/upload',
             news: {
                 title: '',
                 brief: '',
                 content: '',
                 category: ''
             },
-            editorOption: {
-                theme: 'snow',
-                placeholder: "输入任何内容，支持html",
-                modules: {
-                    toolbar: [
-                        ['bold', 'italic', 'underline', 'strike'],
-                        [{ 'list': 'ordered' }, { 'list': 'bullet' }],
-                        [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-                        [{ 'color': [] }, { 'background': [] }],
-                        [{ 'align': [] }],
-                        ['link', 'image', 'video'],
-                        ['clean']
-                    ]
-                }
-            },
             listLoading: false
         }
     },
     methods: {
-        onEditorBlur(editor) {
-            console.log('editor blur!', editor)
-        },
-        onEditorFocus(editor) {
-            console.log('editor focus!', editor)
-        },
-        onEditorReady(editor) {
-            console.log('editor ready!', editor)
-        },
-        onEditorChange({ editor, html, text }) {
-            console.log('editor change!', editor, html, text)
-            this.news.content = html
-        },
         checkForm(data) { //验证担保人信息
             let isOk = true;
             let text = '';
@@ -148,7 +124,6 @@ export default {
                 content: this.news.content,
                 category: this.news.category
             }
-            console.log(reqData);
             if (this.checkForm(reqData)) {
                 this.$confirm('确认提创建吗？', '提示', {}).then(() => {
                     this.listLoading = true;

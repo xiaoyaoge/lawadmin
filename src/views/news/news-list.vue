@@ -41,15 +41,19 @@
                     <table class="bk-table has-thead-bordered">
                         <thead>
                             <tr>
+                                <th width="80">序号</th>
                                 <th>标题</th>
                                 <th>类别</th>
-                                <th>创建时间</th>
-                                <th style="width:325px">操作</th>
+                                <th width="160">创建时间</th>
+                                <th style="width:265px">操作</th>
                             </tr>
                         </thead>
                         <tbody v-if="table.dataList.length>0">
-                            <tr v-for="(item,index) in table.dataList">
-                                <td><div style="width:200px; height:40px; overflow: hidden; text-overflow:ellipsis; white-space: nowrap;">{{item.title}}</div></td>
+                            <tr v-for="(item,index) in table.dataList" :key="index">
+                                <td>{{(index+1>10?index+1:('0'+(index+1)))}}</td>
+                                <td>
+                                    <div style="width:260px; height:20px; overflow: hidden; text-overflow:ellipsis; white-space: nowrap;">{{item.title}}</div>
+                                </td>
                                 <td>{{item.category==1?'仁良业绩':'业内资讯'}}</td>
                                 <td>{{dateTime(item.createTime)}}</td>
                                 <td>

@@ -14,14 +14,16 @@
                 <table class="bk-table">
                     <thead>
                         <tr>
-                            <th>姓名</th>
+                            <th>序号</th>
+                            <th>账号</th>
                             <th>电话</th>
-                            <th style="width:20%;">日期</th>
-                            <th style="width:270px;">操作</th>
+                            <th style="width:20%;">创建时间</th>
+                            <th style="width:220px;">操作</th>
                         </tr>
                     </thead>
                     <tbody v-if="dataList.length>0">
-                        <tr v-for="(item,index) in dataList">
+                        <tr v-for="(item,index) in dataList" :key="index">
+                            <td>{{(index+1>10?index+1:('0'+(index+1)))}}</td>
                             <td>{{item.name}}</td>
                             <td>{{item.mobile}}</td>
                             <td>{{dateTime(item.modifyTime)}}</td>
@@ -39,7 +41,7 @@
                     </tbody>
                     <tbody v-else>
                         <tr>
-                            <td colspan="4" align="center">没数据</td>
+                            <td colspan="5" align="center">没数据</td>
                         </tr>
                     </tbody>
                 </table>

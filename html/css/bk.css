@@ -8306,6 +8306,7 @@ label {
 .w100 {
     width: 100px !important
 }
+
 .w120 {
     width: 120px !important
 }
@@ -9660,8 +9661,8 @@ button.king-btn.bk-block {
 
 .el-button--primary {
     color: #fff;
-    background: #57a3f1;
-    border-color: #57a3f1;
+    background: #b62a2a;
+    border-color: #b62a2a;
 }
 
 .el-dialog--small {
@@ -9727,10 +9728,10 @@ button.king-btn.bk-block {
 }
 
 .type-class .el-radio-button__orig-radio:checked+.el-radio-button__inner {
-    color: #57a3f1;
+    color: #b62a2a;
     background-color: #fff;
-    border: 1px solid #57a3f1!important;
-    box-shadow: 0 0 0 0 #57a3f1!important;
+    border: 1px solid #b62a2a!important;
+    box-shadow: 0 0 0 0 #b62a2a!important;
 }
 
 .type-class .el-radio-button__inner:hover,
@@ -9750,7 +9751,7 @@ button.king-btn.bk-block {
 
 .el-upload--picture-card {
     line-height: 110px;
-    border:2px dashed #c0ccda; 
+    border: 2px dashed #c0ccda;
 }
 
 .modal-footer {
@@ -9765,7 +9766,78 @@ button.king-btn.bk-block {
     color: #666;
     border: 1px solid #ccc;
 }
-.el-input--large, .el-cascader--large{
+
+.el-input--large,
+.el-cascader--large {
     color: #666;
     font-size: 14px;
+}
+
+.el-pager li.active {
+    background-color: #b62a2a;
+    border-color: #b62a2a;
+}
+
+.el-pager li {
+    color: #878996;
+}
+
+.el-pager li.active:hover {
+    color: #fff;
+}
+
+.el-pager li:hover {
+    color: #b62a2a;
+}
+
+.el-pagination .btn-next:hover,
+.el-pagination .btn-prev:hover,
+[class*=" el-icon-"]:hover,
+[class*=" el-icon-"]:focus,
+[class^=el-icon-]:hover,
+[class^=el-icon-]:focus {
+    color: #b62a2a;
+}
+.el-button--primary {
+    color: #fff;
+    background-color: #b62a2a;
+    border-color: #b62a2a
+}
+
+.el-button--primary:focus,
+.el-button--primary:hover {
+    background: #b62a2a;
+    border-color: #b62a2a;
+    color: #fff
+}
+
+.el-button--primary.is-active,
+.el-button--primary:active {
+    background: #b62a2a;
+    border-color: #b62a2a;
+    color: #fff
+}
+
+.el-button--primary:active {
+    outline: 0
+}
+
+.el-button--primary.is-plain {
+    background: #fff;
+    border: 1px solid #bfcbd9;
+    color: #1f2d3d
+}
+
+.el-button--primary.is-plain:focus,
+.el-button--primary.is-plain:hover {
+    background: #fff;
+    border-color: #20a0ff;
+    color: #20a0ff
+}
+
+.el-button--primary.is-plain:active {
+    background: #fff;
+    border-color: #1d90e6;
+    color: #1d90e6;
+    outline: 0
 }

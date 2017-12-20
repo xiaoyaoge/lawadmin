@@ -42,14 +42,15 @@
                         <thead>
                             <tr>
                                 <th>姓名</th>
-                                <th>标签</th>
+                                <th>Title</th>
                                 <th>时间</th>
                                 <th style="width:325px">操作</th>
                             </tr>
                         </thead>
                         <tbody v-if="table.dataList.length>0">
-                            <tr v-for="(item,index) in table.dataList">
+                            <tr v-for="(item,index) in table.dataList" :key="index">
                                 <td>{{item.name}}</td>
+                                <td>{{item.title}}</td>
                                 <td>{{dateTime(item.createTime)}}</td>
                                 <td>
                                     <router-link :to="{path:'/lawyer/edit/'+item.lid}" class="bk-text-button" title="律师信息">
@@ -63,7 +64,7 @@
                         </tbody>
                         <tbody v-else>
                             <tr>
-                                <td colspan="5" align="center">没数据</td>
+                                <td colspan="4" align="center">没数据</td>
                             </tr>
                         </tbody>
                     </table>

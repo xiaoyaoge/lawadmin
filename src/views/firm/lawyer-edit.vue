@@ -46,7 +46,7 @@
                     <div class="bk-form-item mt5">
                         <label class="bk-label"><span class="red">*</span>律师简介：</label>
                         <div class="bk-form-content">
-                            <quill-editor v-if="!formEditBtn" ref="myTextEditor" v-model="lawyer.introduction" :config="editorOption" @blur="onEditorBlur($event)" @focus="onEditorFocus($event)" @ready="onEditorReady($event)"></quill-editor>
+                            <editor v-if="!formEdit" ref="myTextEditor" :fileName="'myFile'" :canCrop="canCrop" v-model="lawyer.introduction"></editor>
                             <div v-else v-html="lawyer.introduction||'&nbsp;'">&nbsp;</div>
                         </div>
                     </div>
@@ -59,14 +59,15 @@
 import moment from 'moment'
 import md5 from 'js-md5';
 import validate from '../../validate';
-import { quillEditor } from 'vue-quill-editor'
+import editor from '../../commons/Quilleditor.vue'
 export default {
     name: 'Edit',
     components: {
-        'quillEditor': quillEditor
+        editor
     },
     data() {
         return {
+            canCrop:true,
             defaultImgUrl: '',
             collapsed: true,
             collapsedText: '显示更多查询条件',
