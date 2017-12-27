@@ -109,8 +109,7 @@ export default {
             }
         },
         handleCurrentChange(val) {
-            this.table.pageNum = val;
-
+            this.table.pageNum = val; 
         },
         checkForm(data) { //验证担保人信息
             let isOk = true;

@@ -21,7 +21,6 @@ const router = new VueRouter({
     routes
 })
 
-sessionStorage.setItem('user', JSON.stringify({ name: '何挺', role: 99 }));
 router.beforeEach((to, from, next) => {
     if (to.path == '/login' || to.path == '/') {
         sessionStorage.removeItem('user');

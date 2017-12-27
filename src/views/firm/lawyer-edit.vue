@@ -29,7 +29,7 @@
                     <div class="bk-form-item mt5">
                         <label class="bk-label"><span class="red">*</span>律师标签：</label>
                         <div class="bk-form-content">
-                            <el-input v-if="!formEdit" type="textarea" v-model="lawyer.title" placeholder="请输入律师标签（如：清华大学研究生、刑法专家）"></el-input>
+                            <el-input v-if="!formEdit" type="textarea" v-model="lawyer.title" placeholder="请输入律师标签（如：清华大学研究生,刑法专家）"></el-input>
                             <div v-else>{{lawyer.title}}</div>
                         </div>
                     </div>
@@ -53,6 +53,22 @@
                 </form>
             </div>
         </div>
+        <el-dialog :title="uploadTitle" size="tiny" v-model="uploadVisible" :close-on-click-modal="false" @close="closeDebtDialog">
+            <el-form ref="debtForm">
+                <el-form-item>
+                    <el-upload ref="upload" list-type="picture-card" :action="uploadPolicy.host" :multiple="uploadConfig.multiple" :data="uploadConfig.data" :on-success="uploadSuccess" :on-change="uploadChange" :on-error="uploadError" :on-remove="uploadRemove" :on-preview="uploadPictureCardPreview" :accept="uploadConfig.accept" :file-list="fileList" :before-upload="beforeUpload">
+                        <i class="el-icon-plus"></i>
+                        <div slot="tip" class="el-upload__tip">只能上传jpg/png/jpeg/webp/gif文件，且不超过5mb</div>
+                    </el-upload>
+                </el-form-item>
+            </el-form>
+            <div class="modal-footer ta-c">
+                <a class="bk-button bk-default" @click="uploadVisible = false" title="点错了">确定</a>
+            </div>
+        </el-dialog>
+        <el-dialog v-model="dialogVisible">
+            <img width="100%" :src="dialogImageUrl" alt="">
+        </el-dialog>
     </section>
 </template>
 <script>
@@ -301,7 +317,7 @@ export default {
         },
         uploadSuccess(response, file, fileList) { //文件长传成功  
             let url = this.uploadPolicy.host + '/' + this.uploadConfig.data.key;
-            this.form[this.uploadType] = url;
+            this.lawyer[this.uploadType] = url;
         },
         beforeUpload(file) {
             let key = this.uploadPolicy.dir + '/' + md5('' + Date.now + this.uploadPolicy.uid + Math.random());
@@ -352,7 +368,7 @@ export default {
 }
 </script>
 <style>
-    .bk-form-content p img{
-        max-width: 100%;
-    }
+.bk-form-content p img {
+    max-width: 100%;
+}
 </style>

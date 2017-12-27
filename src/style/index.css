@@ -24,7 +24,7 @@ body {
 .index-cont .logo {
     display: block;
     width: 270px;
-    height: 86px;
+    height: 100px;
     margin: 20px auto;
     background: url('img/logo.png') center top;
     background-repeat: no-repeat;

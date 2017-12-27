@@ -25,7 +25,7 @@
                     <div class="bk-form-item mt5">
                         <label class="bk-label"><span class="red">*</span>律师标签：</label>
                         <div class="bk-form-content">
-                            <el-input type="textarea" v-model="lawyer.title" placeholder="请输入律师标签（如：清华大学研究生、刑法专家）"></el-input>
+                            <el-input type="textarea" v-model="lawyer.title" placeholder="请输入律师标签（如：清华大学研究生，刑法专家）"></el-input>
                         </div>
                     </div>
                     <div class="bk-form-item mt5">
