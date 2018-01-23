@@ -57,6 +57,8 @@
                                 <td>{{item.category==1?'仁良业绩':'业内资讯'}}</td>
                                 <td>{{dateTime(item.createTime)}}</td>
                                 <td>
+                                    <a v-if="item.top===0" class="bk-text-button" @click="setTop(item,'top')">置顶</a>
+                                    <a v-else class="bk-text-button" @click="setTop(item,'noTop')">取消置顶</a>
                                     <router-link :to="{path:'/news/info/'+item.newsId}" class="bk-text-button" title="基本信息">
                                         基本信息
                                     </router-link>
@@ -143,6 +145,40 @@ export default {
                 });
 
             }).catch(() => {
+                this.$message({
+                    type: 'info',
+                    message: '已取消'
+                });
+            });
+        },
+        setTop(opts, str) { // str top:置顶  noTop: 取消置顶
+            let temp = Object.assign({}, JSON.parse(JSON.stringify(opts))); // copy obj
+            let txtStr = '';
+            if(str==='top'){
+                temp.top = 1;
+                txtStr = '确认把这条数据置顶吗？'
+            }else{
+                temp.top = 0;
+                txtStr = '确认取消这条数据置顶吗'
+            }
+            this.$confirm(txtStr, '提示', {}).then(() => {
+                this.listLoading = true;
+                this.$http.ajaxPost({
+                    url: 'news/modify',
+                    params: temp
+                }, (res) => {
+                    this.$http.aop(res, () => {
+                        if (res.body.ret == '0') {
+                            this.$message({
+                                message: '操作成功',
+                                type: 'success'
+                            }); 
+                        }
+                        this.getDataList();
+                    });
+                    this.listLoading = false;
+                });
+            }).catch(() => { 
                 this.$message({
                     type: 'info',
                     message: '已取消'

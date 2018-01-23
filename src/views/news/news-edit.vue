@@ -44,6 +44,13 @@
                             <div v-else>{{news.brief}} &nbsp;</div>
                         </div>
                     </div>
+                    <div class="bk-form-item" v-if="!formEdit">
+                        <label class="bk-label"><span class="red">*</span>新闻排序：</label>
+                        <div class="bk-form-content">
+                            <el-input type="text" v-if="!formEdit" v-model="news.sort" placeholder="请输入数字"></el-input>
+                            <div v-else>{{news.sort}}</div>
+                        </div>
+                    </div>
                     <div class="bk-form-item mt5">
                         <label class="bk-label"><span class="red">*</span>新闻内容：</label>
                         <div class="bk-form-content">
@@ -202,7 +209,7 @@ export default {
             }, (res) => {
                 this.$http.aop(res, () => {
                     let data = res.body.data;
-                    this.news = data || { newsId: '', title: '', brief: '', content: '', category: '' };
+                    this.news = data || { newsId: '', title: '', brief: '', content: '', category: '', top: 0, sort: 0 };
                     this.news.category = this.news.category + '';
                     this.listLoading = false;
                 });
@@ -228,6 +235,12 @@ export default {
                     case 'brief':
                         if (data[val] === '') {
                             text = '请输入简介';
+                            isOk = false;
+                        }
+                        break;
+                    case 'sort':
+                        if (!validate.checkNum(data[val])) {
+                            text = '排序只能输入整数数字';
                             isOk = false;
                         }
                         break;
@@ -355,7 +368,7 @@ export default {
 }
 </script>
 <style>
-    .bk-form-content p img{
-        max-width: 100%;
-    }
+.bk-form-content p img {
+    max-width: 100%;
+}
 </style>

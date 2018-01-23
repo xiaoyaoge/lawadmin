@@ -43,6 +43,13 @@
                         </div>
                         <div class="bk-form-content" v-else><img :src="(lawyer.avatar||defaultImgUrl)+'?x-oss-process=image/resize,w_160'"></div>
                     </div>
+                    <div class="bk-form-item" v-if="!formEdit">
+                        <label class="bk-label"><span class="red">*</span>律师排序：</label>
+                        <div class="bk-form-content">
+                            <el-input type="text" v-if="!formEdit" v-model="lawyer.sort" placeholder="请输入数字"></el-input>
+                            <div v-else>{{lawyer.sort}}</div>
+                        </div>
+                    </div>
                     <div class="bk-form-item mt5">
                         <label class="bk-label"><span class="red">*</span>律师简介：</label>
                         <div class="bk-form-content">
@@ -93,7 +100,9 @@ export default {
                 avatar: '',
                 title: '',
                 introduction: "",
-                name: ''
+                name: '',
+                top: 0,
+                sort: 0,
             },
             uploadTitle: '',
             uploadType: '',
@@ -216,7 +225,7 @@ export default {
             }, (res) => {
                 this.$http.aop(res, () => {
                     let data = res.body.data;
-                    this.lawyer = data || { avatar: '', title: '', introduction: "", name: '' };
+                    this.lawyer = data || { avatar: '', title: '', introduction: "", name: '',top: 0, sort: 0, };
                     this.listLoading = false;
                 });
             });
@@ -241,6 +250,12 @@ export default {
                     case 'brief':
                         if (data[val] === '') {
                             text = '请输入简介';
+                            isOk = false;
+                        }
+                        break;
+                    case 'sort':
+                        if (!validate.checkNum(data[val])) {
+                            text = '排序只能输入整数数字';
                             isOk = false;
                         }
                         break;

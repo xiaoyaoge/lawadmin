@@ -32,6 +32,12 @@
                             </el-select>
                         </div>
                     </div>
+                    <div class="bk-form-item">
+                        <label class="bk-label"><span class="red">*</span>新闻排序：</label>
+                        <div class="bk-form-content">
+                            <el-input type="text" v-model="news.sort" placeholder="请输入数字"></el-input>
+                        </div>
+                    </div>
                     <div class="bk-form-item mt5">
                         <label class="bk-label"><span class="red">*</span>新闻简介：</label>
                         <div class="bk-form-content">
@@ -58,6 +64,7 @@
 </template>
 <script>
 import editor from '../../commons/Quilleditor.vue'
+import validate from '../../validate'
 export default {
     name: 'NewsAdd',
     components: {
@@ -73,7 +80,9 @@ export default {
                 title: '',
                 brief: '',
                 content: '',
-                category: ''
+                category: '',
+                sort: 0,
+                top: 0
             },
             listLoading: false
         }
@@ -99,6 +108,12 @@ export default {
                     case 'brief':
                         if (data[val] === '') {
                             text = '请输入简介';
+                            isOk = false;
+                        }
+                        break;
+                    case 'sort':
+                        if(!validate.checkNum(data[val])){
+                            text = '排序只能输入整数数字';
                             isOk = false;
                         }
                         break;
