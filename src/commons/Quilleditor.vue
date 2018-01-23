@@ -171,8 +171,8 @@
     </div>
 </template>
 <script>
-import '../style/css/quill.core.css'
-import '../style/css/quill.bubble.css' 
+// import '../style/css/quill.core.css'
+// import '../style/css/quill.bubble.css' 
 import '../style/css/quill.snow.css'
 import md5 from 'js-md5';
 import { quillEditor } from 'vue-quill-editor'

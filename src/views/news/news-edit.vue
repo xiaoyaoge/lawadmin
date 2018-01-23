@@ -48,7 +48,7 @@
                         <label class="bk-label"><span class="red">*</span>新闻内容：</label>
                         <div class="bk-form-content">
                             <editor v-if="!formEdit" ref="myTextEditor" :fileName="'myFile'" :canCrop="canCrop" v-model="news.content"></editor>
-                            <div v-else v-html="news.content||'&nbsp;'">&nbsp;</div>
+                            <div class="ql-editor" v-else v-html="news.content||'&nbsp;'">&nbsp;</div>
                         </div>
                     </div>
                 </form>

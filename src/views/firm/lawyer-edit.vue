@@ -47,7 +47,7 @@
                         <label class="bk-label"><span class="red">*</span>律师简介：</label>
                         <div class="bk-form-content">
                             <editor v-if="!formEdit" ref="myTextEditor" :fileName="'myFile'" :canCrop="canCrop" v-model="lawyer.introduction"></editor>
-                            <div v-else v-html="lawyer.introduction||'&nbsp;'">&nbsp;</div>
+                            <div class="ql-editor" v-else v-html="lawyer.introduction||'&nbsp;'">&nbsp;</div>
                         </div>
                     </div>
                 </form>
